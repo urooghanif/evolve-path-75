@@ -13,8 +13,18 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppSubmitRouteImport } from './routes/_app.submit'
+import { Route as AppReportsRouteImport } from './routes/_app.reports'
+import { Route as AppReadinessRouteImport } from './routes/_app.readiness'
+import { Route as AppPanelsRouteImport } from './routes/_app.panels'
+import { Route as AppMyAchievementsRouteImport } from './routes/_app.my-achievements'
+import { Route as AppEligibilityRouteImport } from './routes/_app.eligibility'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppCyclesRouteImport } from './routes/_app.cycles'
+import { Route as AppConfigRouteImport } from './routes/_app.config'
+import { Route as AppCasesRouteImport } from './routes/_app.cases'
+import { Route as AppAuditRouteImport } from './routes/_app.audit'
+import { Route as AppAdminUsersRouteImport } from './routes/_app.admin.users'
+import { Route as AppAdminSystemRouteImport } from './routes/_app.admin.system'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -35,6 +45,31 @@ const AppSubmitRoute = AppSubmitRouteImport.update({
   path: '/submit',
   getParentRoute: () => AppRoute,
 } as any)
+const AppReportsRoute = AppReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReadinessRoute = AppReadinessRouteImport.update({
+  id: '/readiness',
+  path: '/readiness',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPanelsRoute = AppPanelsRouteImport.update({
+  id: '/panels',
+  path: '/panels',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMyAchievementsRoute = AppMyAchievementsRouteImport.update({
+  id: '/my-achievements',
+  path: '/my-achievements',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEligibilityRoute = AppEligibilityRouteImport.update({
+  id: '/eligibility',
+  path: '/eligibility',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -45,43 +80,138 @@ const AppCyclesRoute = AppCyclesRouteImport.update({
   path: '/cycles',
   getParentRoute: () => AppRoute,
 } as any)
+const AppConfigRoute = AppConfigRouteImport.update({
+  id: '/config',
+  path: '/config',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCasesRoute = AppCasesRouteImport.update({
+  id: '/cases',
+  path: '/cases',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAuditRoute = AppAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAdminUsersRoute = AppAdminUsersRouteImport.update({
+  id: '/admin/users',
+  path: '/admin/users',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAdminSystemRoute = AppAdminSystemRouteImport.update({
+  id: '/admin/system',
+  path: '/admin/system',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/audit': typeof AppAuditRoute
+  '/cases': typeof AppCasesRoute
+  '/config': typeof AppConfigRoute
   '/cycles': typeof AppCyclesRoute
   '/dashboard': typeof AppDashboardRoute
+  '/eligibility': typeof AppEligibilityRoute
+  '/my-achievements': typeof AppMyAchievementsRoute
+  '/panels': typeof AppPanelsRoute
+  '/readiness': typeof AppReadinessRoute
+  '/reports': typeof AppReportsRoute
   '/submit': typeof AppSubmitRoute
+  '/admin/system': typeof AppAdminSystemRoute
+  '/admin/users': typeof AppAdminUsersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/audit': typeof AppAuditRoute
+  '/cases': typeof AppCasesRoute
+  '/config': typeof AppConfigRoute
   '/cycles': typeof AppCyclesRoute
   '/dashboard': typeof AppDashboardRoute
+  '/eligibility': typeof AppEligibilityRoute
+  '/my-achievements': typeof AppMyAchievementsRoute
+  '/panels': typeof AppPanelsRoute
+  '/readiness': typeof AppReadinessRoute
+  '/reports': typeof AppReportsRoute
   '/submit': typeof AppSubmitRoute
+  '/admin/system': typeof AppAdminSystemRoute
+  '/admin/users': typeof AppAdminUsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
+  '/_app/audit': typeof AppAuditRoute
+  '/_app/cases': typeof AppCasesRoute
+  '/_app/config': typeof AppConfigRoute
   '/_app/cycles': typeof AppCyclesRoute
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/eligibility': typeof AppEligibilityRoute
+  '/_app/my-achievements': typeof AppMyAchievementsRoute
+  '/_app/panels': typeof AppPanelsRoute
+  '/_app/readiness': typeof AppReadinessRoute
+  '/_app/reports': typeof AppReportsRoute
   '/_app/submit': typeof AppSubmitRoute
+  '/_app/admin/system': typeof AppAdminSystemRoute
+  '/_app/admin/users': typeof AppAdminUsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/cycles' | '/dashboard' | '/submit'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/audit'
+    | '/cases'
+    | '/config'
+    | '/cycles'
+    | '/dashboard'
+    | '/eligibility'
+    | '/my-achievements'
+    | '/panels'
+    | '/readiness'
+    | '/reports'
+    | '/submit'
+    | '/admin/system'
+    | '/admin/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/cycles' | '/dashboard' | '/submit'
+  to:
+    | '/'
+    | '/login'
+    | '/audit'
+    | '/cases'
+    | '/config'
+    | '/cycles'
+    | '/dashboard'
+    | '/eligibility'
+    | '/my-achievements'
+    | '/panels'
+    | '/readiness'
+    | '/reports'
+    | '/submit'
+    | '/admin/system'
+    | '/admin/users'
   id:
     | '__root__'
     | '/'
     | '/_app'
     | '/login'
+    | '/_app/audit'
+    | '/_app/cases'
+    | '/_app/config'
     | '/_app/cycles'
     | '/_app/dashboard'
+    | '/_app/eligibility'
+    | '/_app/my-achievements'
+    | '/_app/panels'
+    | '/_app/readiness'
+    | '/_app/reports'
     | '/_app/submit'
+    | '/_app/admin/system'
+    | '/_app/admin/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -120,6 +250,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSubmitRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/reports': {
+      id: '/_app/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AppReportsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/readiness': {
+      id: '/_app/readiness'
+      path: '/readiness'
+      fullPath: '/readiness'
+      preLoaderRoute: typeof AppReadinessRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/panels': {
+      id: '/_app/panels'
+      path: '/panels'
+      fullPath: '/panels'
+      preLoaderRoute: typeof AppPanelsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/my-achievements': {
+      id: '/_app/my-achievements'
+      path: '/my-achievements'
+      fullPath: '/my-achievements'
+      preLoaderRoute: typeof AppMyAchievementsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/eligibility': {
+      id: '/_app/eligibility'
+      path: '/eligibility'
+      fullPath: '/eligibility'
+      preLoaderRoute: typeof AppEligibilityRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/dashboard': {
       id: '/_app/dashboard'
       path: '/dashboard'
@@ -134,19 +299,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCyclesRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/config': {
+      id: '/_app/config'
+      path: '/config'
+      fullPath: '/config'
+      preLoaderRoute: typeof AppConfigRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/cases': {
+      id: '/_app/cases'
+      path: '/cases'
+      fullPath: '/cases'
+      preLoaderRoute: typeof AppCasesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/audit': {
+      id: '/_app/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AppAuditRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/admin/users': {
+      id: '/_app/admin/users'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AppAdminUsersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/admin/system': {
+      id: '/_app/admin/system'
+      path: '/admin/system'
+      fullPath: '/admin/system'
+      preLoaderRoute: typeof AppAdminSystemRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppAuditRoute: typeof AppAuditRoute
+  AppCasesRoute: typeof AppCasesRoute
+  AppConfigRoute: typeof AppConfigRoute
   AppCyclesRoute: typeof AppCyclesRoute
   AppDashboardRoute: typeof AppDashboardRoute
+  AppEligibilityRoute: typeof AppEligibilityRoute
+  AppMyAchievementsRoute: typeof AppMyAchievementsRoute
+  AppPanelsRoute: typeof AppPanelsRoute
+  AppReadinessRoute: typeof AppReadinessRoute
+  AppReportsRoute: typeof AppReportsRoute
   AppSubmitRoute: typeof AppSubmitRoute
+  AppAdminSystemRoute: typeof AppAdminSystemRoute
+  AppAdminUsersRoute: typeof AppAdminUsersRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAuditRoute: AppAuditRoute,
+  AppCasesRoute: AppCasesRoute,
+  AppConfigRoute: AppConfigRoute,
   AppCyclesRoute: AppCyclesRoute,
   AppDashboardRoute: AppDashboardRoute,
+  AppEligibilityRoute: AppEligibilityRoute,
+  AppMyAchievementsRoute: AppMyAchievementsRoute,
+  AppPanelsRoute: AppPanelsRoute,
+  AppReadinessRoute: AppReadinessRoute,
+  AppReportsRoute: AppReportsRoute,
   AppSubmitRoute: AppSubmitRoute,
+  AppAdminSystemRoute: AppAdminSystemRoute,
+  AppAdminUsersRoute: AppAdminUsersRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -159,3 +379,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
