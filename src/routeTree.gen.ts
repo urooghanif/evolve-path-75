@@ -23,6 +23,7 @@ import { Route as AppCyclesRouteImport } from './routes/_app.cycles'
 import { Route as AppConfigRouteImport } from './routes/_app.config'
 import { Route as AppCasesRouteImport } from './routes/_app.cases'
 import { Route as AppAuditRouteImport } from './routes/_app.audit'
+import { Route as AppCasesCaseIdRouteImport } from './routes/_app.cases.$caseId'
 import { Route as AppAdminUsersRouteImport } from './routes/_app.admin.users'
 import { Route as AppAdminSystemRouteImport } from './routes/_app.admin.system'
 
@@ -95,6 +96,11 @@ const AppAuditRoute = AppAuditRouteImport.update({
   path: '/audit',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCasesCaseIdRoute = AppCasesCaseIdRouteImport.update({
+  id: '/$caseId',
+  path: '/$caseId',
+  getParentRoute: () => AppCasesRoute,
+} as any)
 const AppAdminUsersRoute = AppAdminUsersRouteImport.update({
   id: '/admin/users',
   path: '/admin/users',
@@ -110,7 +116,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/audit': typeof AppAuditRoute
-  '/cases': typeof AppCasesRoute
+  '/cases': typeof AppCasesRouteWithChildren
   '/config': typeof AppConfigRoute
   '/cycles': typeof AppCyclesRoute
   '/dashboard': typeof AppDashboardRoute
@@ -122,12 +128,13 @@ export interface FileRoutesByFullPath {
   '/submit': typeof AppSubmitRoute
   '/admin/system': typeof AppAdminSystemRoute
   '/admin/users': typeof AppAdminUsersRoute
+  '/cases/$caseId': typeof AppCasesCaseIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/audit': typeof AppAuditRoute
-  '/cases': typeof AppCasesRoute
+  '/cases': typeof AppCasesRouteWithChildren
   '/config': typeof AppConfigRoute
   '/cycles': typeof AppCyclesRoute
   '/dashboard': typeof AppDashboardRoute
@@ -139,6 +146,7 @@ export interface FileRoutesByTo {
   '/submit': typeof AppSubmitRoute
   '/admin/system': typeof AppAdminSystemRoute
   '/admin/users': typeof AppAdminUsersRoute
+  '/cases/$caseId': typeof AppCasesCaseIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -146,7 +154,7 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
   '/_app/audit': typeof AppAuditRoute
-  '/_app/cases': typeof AppCasesRoute
+  '/_app/cases': typeof AppCasesRouteWithChildren
   '/_app/config': typeof AppConfigRoute
   '/_app/cycles': typeof AppCyclesRoute
   '/_app/dashboard': typeof AppDashboardRoute
@@ -158,6 +166,7 @@ export interface FileRoutesById {
   '/_app/submit': typeof AppSubmitRoute
   '/_app/admin/system': typeof AppAdminSystemRoute
   '/_app/admin/users': typeof AppAdminUsersRoute
+  '/_app/cases/$caseId': typeof AppCasesCaseIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/submit'
     | '/admin/system'
     | '/admin/users'
+    | '/cases/$caseId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -194,6 +204,7 @@ export interface FileRouteTypes {
     | '/submit'
     | '/admin/system'
     | '/admin/users'
+    | '/cases/$caseId'
   id:
     | '__root__'
     | '/'
@@ -212,6 +223,7 @@ export interface FileRouteTypes {
     | '/_app/submit'
     | '/_app/admin/system'
     | '/_app/admin/users'
+    | '/_app/cases/$caseId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -320,6 +332,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAuditRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/cases/$caseId': {
+      id: '/_app/cases/$caseId'
+      path: '/$caseId'
+      fullPath: '/cases/$caseId'
+      preLoaderRoute: typeof AppCasesCaseIdRouteImport
+      parentRoute: typeof AppCasesRoute
+    }
     '/_app/admin/users': {
       id: '/_app/admin/users'
       path: '/admin/users'
@@ -337,9 +356,21 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AppCasesRouteChildren {
+  AppCasesCaseIdRoute: typeof AppCasesCaseIdRoute
+}
+
+const AppCasesRouteChildren: AppCasesRouteChildren = {
+  AppCasesCaseIdRoute: AppCasesCaseIdRoute,
+}
+
+const AppCasesRouteWithChildren = AppCasesRoute._addFileChildren(
+  AppCasesRouteChildren,
+)
+
 interface AppRouteChildren {
   AppAuditRoute: typeof AppAuditRoute
-  AppCasesRoute: typeof AppCasesRoute
+  AppCasesRoute: typeof AppCasesRouteWithChildren
   AppConfigRoute: typeof AppConfigRoute
   AppCyclesRoute: typeof AppCyclesRoute
   AppDashboardRoute: typeof AppDashboardRoute
@@ -355,7 +386,7 @@ interface AppRouteChildren {
 
 const AppRouteChildren: AppRouteChildren = {
   AppAuditRoute: AppAuditRoute,
-  AppCasesRoute: AppCasesRoute,
+  AppCasesRoute: AppCasesRouteWithChildren,
   AppConfigRoute: AppConfigRoute,
   AppCyclesRoute: AppCyclesRoute,
   AppDashboardRoute: AppDashboardRoute,
@@ -379,13 +410,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

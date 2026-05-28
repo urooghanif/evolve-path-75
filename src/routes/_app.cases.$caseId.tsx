@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { StatusBadge } from "@/components/status-badge";
-import { getCaseDetail } from "@/lib/case-details";
+import { getCaseDetail, type CaseDetail } from "@/lib/case-details";
 import { STATUS_LABEL } from "@/lib/mock-data";
 import { useAuth } from "@/lib/auth";
 import { toast } from "sonner";
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/_app/cases/$caseId")({
 });
 
 function CaseDetailPage() {
-  const c = Route.useLoaderData();
+  const c = Route.useLoaderData() as CaseDetail;
   const { user } = useAuth();
   const navigate = useNavigate();
   if (!user) return null;
