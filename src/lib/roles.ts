@@ -50,6 +50,7 @@ export const ROLE_NAV: Record<Role, NavItem[]> = {
     { to: "/eligibility", label: "Eligibility Engine", icon: Target },
     { to: "/cases", label: "Promotion Cases", icon: Briefcase },
     { to: "/panels", label: "Interview Panels", icon: Users },
+    { to: "/letters", label: "Letters", icon: FileCheck },
     { to: "/reports", label: "Reports", icon: ScrollText },
     { to: "/config", label: "Configuration", icon: Settings },
     { to: "/audit", label: "Audit Trail", icon: History },
@@ -79,6 +80,7 @@ export const ROLE_NAV: Record<Role, NavItem[]> = {
   final_authority: [
     { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { to: "/cases", label: "Pending Approvals", icon: Gavel },
+    { to: "/letters", label: "Letters", icon: FileCheck },
   ],
   system_admin: [
     { to: "/admin/users", label: "Users & Roles", icon: Users },

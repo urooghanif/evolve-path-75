@@ -17,6 +17,7 @@ import { Route as AppReportsRouteImport } from './routes/_app.reports'
 import { Route as AppReadinessRouteImport } from './routes/_app.readiness'
 import { Route as AppPanelsRouteImport } from './routes/_app.panels'
 import { Route as AppMyAchievementsRouteImport } from './routes/_app.my-achievements'
+import { Route as AppLettersRouteImport } from './routes/_app.letters'
 import { Route as AppEligibilityRouteImport } from './routes/_app.eligibility'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppCyclesRouteImport } from './routes/_app.cycles'
@@ -64,6 +65,11 @@ const AppPanelsRoute = AppPanelsRouteImport.update({
 const AppMyAchievementsRoute = AppMyAchievementsRouteImport.update({
   id: '/my-achievements',
   path: '/my-achievements',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLettersRoute = AppLettersRouteImport.update({
+  id: '/letters',
+  path: '/letters',
   getParentRoute: () => AppRoute,
 } as any)
 const AppEligibilityRoute = AppEligibilityRouteImport.update({
@@ -121,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/cycles': typeof AppCyclesRoute
   '/dashboard': typeof AppDashboardRoute
   '/eligibility': typeof AppEligibilityRoute
+  '/letters': typeof AppLettersRoute
   '/my-achievements': typeof AppMyAchievementsRoute
   '/panels': typeof AppPanelsRoute
   '/readiness': typeof AppReadinessRoute
@@ -139,6 +146,7 @@ export interface FileRoutesByTo {
   '/cycles': typeof AppCyclesRoute
   '/dashboard': typeof AppDashboardRoute
   '/eligibility': typeof AppEligibilityRoute
+  '/letters': typeof AppLettersRoute
   '/my-achievements': typeof AppMyAchievementsRoute
   '/panels': typeof AppPanelsRoute
   '/readiness': typeof AppReadinessRoute
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/_app/cycles': typeof AppCyclesRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/eligibility': typeof AppEligibilityRoute
+  '/_app/letters': typeof AppLettersRoute
   '/_app/my-achievements': typeof AppMyAchievementsRoute
   '/_app/panels': typeof AppPanelsRoute
   '/_app/readiness': typeof AppReadinessRoute
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/cycles'
     | '/dashboard'
     | '/eligibility'
+    | '/letters'
     | '/my-achievements'
     | '/panels'
     | '/readiness'
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/cycles'
     | '/dashboard'
     | '/eligibility'
+    | '/letters'
     | '/my-achievements'
     | '/panels'
     | '/readiness'
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/_app/cycles'
     | '/_app/dashboard'
     | '/_app/eligibility'
+    | '/_app/letters'
     | '/_app/my-achievements'
     | '/_app/panels'
     | '/_app/readiness'
@@ -288,6 +300,13 @@ declare module '@tanstack/react-router' {
       path: '/my-achievements'
       fullPath: '/my-achievements'
       preLoaderRoute: typeof AppMyAchievementsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/letters': {
+      id: '/_app/letters'
+      path: '/letters'
+      fullPath: '/letters'
+      preLoaderRoute: typeof AppLettersRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/eligibility': {
@@ -375,6 +394,7 @@ interface AppRouteChildren {
   AppCyclesRoute: typeof AppCyclesRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppEligibilityRoute: typeof AppEligibilityRoute
+  AppLettersRoute: typeof AppLettersRoute
   AppMyAchievementsRoute: typeof AppMyAchievementsRoute
   AppPanelsRoute: typeof AppPanelsRoute
   AppReadinessRoute: typeof AppReadinessRoute
@@ -391,6 +411,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppCyclesRoute: AppCyclesRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppEligibilityRoute: AppEligibilityRoute,
+  AppLettersRoute: AppLettersRoute,
   AppMyAchievementsRoute: AppMyAchievementsRoute,
   AppPanelsRoute: AppPanelsRoute,
   AppReadinessRoute: AppReadinessRoute,
