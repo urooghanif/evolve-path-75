@@ -23,7 +23,7 @@ const TEMPLATES = [
 
 const ISSUED = [
   { id: "LTR-2026-0118", case: "PC-1008", employee: "Emma Roberts", template: "Promotion approval", issued: "2026-01-15", channel: "Email + DocuSign", status: "signed" },
-  { id: "LTR-2026-0117", case: "PC-1007", employee: "Karan Singh", template: "Promotion approval", issued: "2026-01-14", channel: "Email + DocuSign", status: "sent" },
+  { id: "LTR-2026-0117", case: "PC-1007", employee: "Zain Abbas", template: "Promotion approval", issued: "2026-01-14", channel: "Email + DocuSign", status: "sent" },
   { id: "LTR-2026-0116", case: "PC-1009", employee: "Yuki Tanaka", template: "Deferral notification", issued: "2026-01-12", channel: "Email", status: "sent" },
 ];
 
@@ -142,7 +142,7 @@ function LettersPage() {
               <p>With our congratulations,</p>
 
               <div className="pt-8">
-                <div className="font-semibold">Michael Torres</div>
+                <div className="font-semibold">Imran Siddiqui</div>
                 <div className="text-xs text-muted-cb">Chief People Officer</div>
               </div>
             </div>

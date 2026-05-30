@@ -72,15 +72,15 @@ export type PromotionCase = {
 };
 
 export const CASES: PromotionCase[] = [
-  { id: "PC-1001", employeeName: "Rahul Mehta", employeeId: "U-EMP-07", department: "Front-End Dev", currentRank: 13, proposedRank: 14, proposedDesignation: "Lead Engineer", stage: "submitted", daysInStage: 2, overdue: false, rank16Plus: false },
-  { id: "PC-1002", employeeName: "Neha Iyer", employeeId: "E-208", department: "Back-End Dev", currentRank: 14, proposedRank: 15, proposedDesignation: "Staff Engineer", stage: "dl_review", daysInStage: 5, overdue: false, rank16Plus: false },
-  { id: "PC-1003", employeeName: "Tom Bradley", employeeId: "E-311", department: "SQA", currentRank: 15, proposedRank: 16, proposedDesignation: "QA Architect", stage: "interview_required", daysInStage: 9, overdue: true, rank16Plus: true },
-  { id: "PC-1004", employeeName: "Anita Rao", employeeId: "E-402", department: "Front-End Dev", currentRank: 13, proposedRank: 14, proposedDesignation: "Lead Engineer", stage: "lm_review", daysInStage: 3, overdue: false, rank16Plus: false },
-  { id: "PC-1005", employeeName: "Marcus Lee", employeeId: "E-512", department: "Back-End Dev", currentRank: 16, proposedRank: 17, proposedDesignation: "Principal Engineer", stage: "panel_evaluation", daysInStage: 12, overdue: true, rank16Plus: true },
-  { id: "PC-1006", employeeName: "Sofia Garcia", employeeId: "E-619", department: "SQA", currentRank: 14, proposedRank: 15, proposedDesignation: "Senior QA Engineer", stage: "hod_review", daysInStage: 1, overdue: false, rank16Plus: false },
-  { id: "PC-1007", employeeName: "Karan Singh", employeeId: "E-708", department: "Front-End Dev", currentRank: 15, proposedRank: 16, proposedDesignation: "Engineering Manager", stage: "final_approval", daysInStage: 6, overdue: false, rank16Plus: true },
-  { id: "PC-1008", employeeName: "Emma Roberts", employeeId: "E-822", department: "Back-End Dev", currentRank: 13, proposedRank: 14, proposedDesignation: "Lead Engineer", stage: "completed", daysInStage: 0, overdue: false, rank16Plus: false },
-  { id: "PC-1009", employeeName: "Yuki Tanaka", employeeId: "E-901", department: "SQA", currentRank: 13, proposedRank: 14, proposedDesignation: "Lead QA", stage: "deferred", daysInStage: 18, overdue: true, rank16Plus: false },
+  { id: "PC-1001", employeeName: "Ahmed Raza", employeeId: "U-EMP-07", department: "Front-End Dev", currentRank: 13, proposedRank: 14, proposedDesignation: "Lead Engineer", stage: "submitted", daysInStage: 2, overdue: false, rank16Plus: false },
+  { id: "PC-1002", employeeName: "Ayesha Siddiqa", employeeId: "E-208", department: "Back-End Dev", currentRank: 14, proposedRank: 15, proposedDesignation: "Staff Engineer", stage: "dl_review", daysInStage: 5, overdue: false, rank16Plus: false },
+  { id: "PC-1003", employeeName: "Bilal Hussain", employeeId: "E-311", department: "SQA", currentRank: 15, proposedRank: 16, proposedDesignation: "QA Architect", stage: "interview_required", daysInStage: 9, overdue: true, rank16Plus: true },
+  { id: "PC-1004", employeeName: "Hira Nawaz", employeeId: "E-402", department: "Front-End Dev", currentRank: 13, proposedRank: 14, proposedDesignation: "Lead Engineer", stage: "lm_review", daysInStage: 3, overdue: false, rank16Plus: false },
+  { id: "PC-1005", employeeName: "Faisal Iqbal", employeeId: "E-512", department: "Back-End Dev", currentRank: 16, proposedRank: 17, proposedDesignation: "Principal Engineer", stage: "panel_evaluation", daysInStage: 12, overdue: true, rank16Plus: true },
+  { id: "PC-1006", employeeName: "Mariam Asif", employeeId: "E-619", department: "SQA", currentRank: 14, proposedRank: 15, proposedDesignation: "Senior QA Engineer", stage: "hod_review", daysInStage: 1, overdue: false, rank16Plus: false },
+  { id: "PC-1007", employeeName: "Zain Abbas", employeeId: "E-708", department: "Front-End Dev", currentRank: 15, proposedRank: 16, proposedDesignation: "Engineering Manager", stage: "final_approval", daysInStage: 6, overdue: false, rank16Plus: true },
+  { id: "PC-1008", employeeName: "Sadia Khan", employeeId: "E-822", department: "Back-End Dev", currentRank: 13, proposedRank: 14, proposedDesignation: "Lead Engineer", stage: "completed", daysInStage: 0, overdue: false, rank16Plus: false },
+  { id: "PC-1009", employeeName: "Adnan Mehmood", employeeId: "E-901", department: "SQA", currentRank: 13, proposedRank: 14, proposedDesignation: "Lead QA", stage: "deferred", daysInStage: 18, overdue: true, rank16Plus: false },
 ];
 
 export const STAGE_COUNTS = () => {

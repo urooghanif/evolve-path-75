@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Bell, LogOut } from "lucide-react";
+import { Bell, LogOut, Settings, Palette } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { ROLE_LABELS, ROLE_NAV } from "@/lib/roles";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,11 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
+const GLOBAL_NAV = [
+  { to: "/settings", label: "Settings", icon: Settings },
+  { to: "/appearance", label: "Appearance", icon: Palette },
+];
+
 export function AppShell({ children }: { children: ReactNode }) {
   const { user, logout } = useAuth();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -16,14 +21,15 @@ export function AppShell({ children }: { children: ReactNode }) {
   const nav = ROLE_NAV[user.role];
 
   return (
-    <div className="min-h-screen flex bg-canvas">
-      {/* Sidebar */}
-      <aside className="hidden md:flex w-64 shrink-0 flex-col border-r border-hairline bg-canvas">
-        <div className="h-16 px-6 flex items-center gap-2 border-b border-hairline">
+    <div className="h-screen flex bg-canvas overflow-hidden">
+      {/* Sidebar — fixed full-height */}
+      <aside className="hidden md:flex w-64 shrink-0 flex-col border-r border-hairline bg-canvas h-screen sticky top-0">
+        <div className="h-16 px-6 flex items-center gap-2 border-b border-hairline shrink-0">
           <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">P</div>
           <span className="title-md tracking-tight">Promote</span>
         </div>
-        <nav className="flex-1 py-4 px-3 space-y-0.5">
+        <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-0.5">
+
           {nav.map((item) => {
             const Icon = item.icon;
             const active = pathname === item.to || (item.to !== "/dashboard" && pathname.startsWith(item.to));
@@ -41,6 +47,25 @@ export function AppShell({ children }: { children: ReactNode }) {
               </Link>
             );
           })}
+          <div className="pt-3 mt-3 border-t border-hairline-soft space-y-0.5">
+            {GLOBAL_NAV.map((item) => {
+              const Icon = item.icon;
+              const active = pathname.startsWith(item.to);
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={cn(
+                    "flex items-center gap-3 px-3 h-10 rounded-md text-sm font-medium transition-colors",
+                    active ? "bg-surface-strong text-ink" : "text-body hover:bg-surface-soft hover:text-ink",
+                  )}
+                >
+                  <Icon className="h-4 w-4" />
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
         </nav>
         <div className="p-3 border-t border-hairline">
           <div className="flex items-center gap-3 px-2 py-2">

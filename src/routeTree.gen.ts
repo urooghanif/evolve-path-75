@@ -13,6 +13,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppSubmitRouteImport } from './routes/_app.submit'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppReportsRouteImport } from './routes/_app.reports'
 import { Route as AppReadinessRouteImport } from './routes/_app.readiness'
 import { Route as AppPanelsRouteImport } from './routes/_app.panels'
@@ -24,6 +25,7 @@ import { Route as AppCyclesRouteImport } from './routes/_app.cycles'
 import { Route as AppConfigRouteImport } from './routes/_app.config'
 import { Route as AppCasesRouteImport } from './routes/_app.cases'
 import { Route as AppAuditRouteImport } from './routes/_app.audit'
+import { Route as AppAppearanceRouteImport } from './routes/_app.appearance'
 import { Route as AppCasesCaseIdRouteImport } from './routes/_app.cases.$caseId'
 import { Route as AppAdminUsersRouteImport } from './routes/_app.admin.users'
 import { Route as AppAdminSystemRouteImport } from './routes/_app.admin.system'
@@ -45,6 +47,11 @@ const IndexRoute = IndexRouteImport.update({
 const AppSubmitRoute = AppSubmitRouteImport.update({
   id: '/submit',
   path: '/submit',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AppRoute,
 } as any)
 const AppReportsRoute = AppReportsRouteImport.update({
@@ -102,6 +109,11 @@ const AppAuditRoute = AppAuditRouteImport.update({
   path: '/audit',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAppearanceRoute = AppAppearanceRouteImport.update({
+  id: '/appearance',
+  path: '/appearance',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCasesCaseIdRoute = AppCasesCaseIdRouteImport.update({
   id: '/$caseId',
   path: '/$caseId',
@@ -121,6 +133,7 @@ const AppAdminSystemRoute = AppAdminSystemRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/appearance': typeof AppAppearanceRoute
   '/audit': typeof AppAuditRoute
   '/cases': typeof AppCasesRouteWithChildren
   '/config': typeof AppConfigRoute
@@ -132,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/panels': typeof AppPanelsRoute
   '/readiness': typeof AppReadinessRoute
   '/reports': typeof AppReportsRoute
+  '/settings': typeof AppSettingsRoute
   '/submit': typeof AppSubmitRoute
   '/admin/system': typeof AppAdminSystemRoute
   '/admin/users': typeof AppAdminUsersRoute
@@ -140,6 +154,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/appearance': typeof AppAppearanceRoute
   '/audit': typeof AppAuditRoute
   '/cases': typeof AppCasesRouteWithChildren
   '/config': typeof AppConfigRoute
@@ -151,6 +166,7 @@ export interface FileRoutesByTo {
   '/panels': typeof AppPanelsRoute
   '/readiness': typeof AppReadinessRoute
   '/reports': typeof AppReportsRoute
+  '/settings': typeof AppSettingsRoute
   '/submit': typeof AppSubmitRoute
   '/admin/system': typeof AppAdminSystemRoute
   '/admin/users': typeof AppAdminUsersRoute
@@ -161,6 +177,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
+  '/_app/appearance': typeof AppAppearanceRoute
   '/_app/audit': typeof AppAuditRoute
   '/_app/cases': typeof AppCasesRouteWithChildren
   '/_app/config': typeof AppConfigRoute
@@ -172,6 +189,7 @@ export interface FileRoutesById {
   '/_app/panels': typeof AppPanelsRoute
   '/_app/readiness': typeof AppReadinessRoute
   '/_app/reports': typeof AppReportsRoute
+  '/_app/settings': typeof AppSettingsRoute
   '/_app/submit': typeof AppSubmitRoute
   '/_app/admin/system': typeof AppAdminSystemRoute
   '/_app/admin/users': typeof AppAdminUsersRoute
@@ -182,6 +200,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/login'
+    | '/appearance'
     | '/audit'
     | '/cases'
     | '/config'
@@ -193,6 +212,7 @@ export interface FileRouteTypes {
     | '/panels'
     | '/readiness'
     | '/reports'
+    | '/settings'
     | '/submit'
     | '/admin/system'
     | '/admin/users'
@@ -201,6 +221,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/login'
+    | '/appearance'
     | '/audit'
     | '/cases'
     | '/config'
@@ -212,6 +233,7 @@ export interface FileRouteTypes {
     | '/panels'
     | '/readiness'
     | '/reports'
+    | '/settings'
     | '/submit'
     | '/admin/system'
     | '/admin/users'
@@ -221,6 +243,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_app'
     | '/login'
+    | '/_app/appearance'
     | '/_app/audit'
     | '/_app/cases'
     | '/_app/config'
@@ -232,6 +255,7 @@ export interface FileRouteTypes {
     | '/_app/panels'
     | '/_app/readiness'
     | '/_app/reports'
+    | '/_app/settings'
     | '/_app/submit'
     | '/_app/admin/system'
     | '/_app/admin/users'
@@ -272,6 +296,13 @@ declare module '@tanstack/react-router' {
       path: '/submit'
       fullPath: '/submit'
       preLoaderRoute: typeof AppSubmitRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/reports': {
@@ -351,6 +382,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAuditRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/appearance': {
+      id: '/_app/appearance'
+      path: '/appearance'
+      fullPath: '/appearance'
+      preLoaderRoute: typeof AppAppearanceRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/cases/$caseId': {
       id: '/_app/cases/$caseId'
       path: '/$caseId'
@@ -388,6 +426,7 @@ const AppCasesRouteWithChildren = AppCasesRoute._addFileChildren(
 )
 
 interface AppRouteChildren {
+  AppAppearanceRoute: typeof AppAppearanceRoute
   AppAuditRoute: typeof AppAuditRoute
   AppCasesRoute: typeof AppCasesRouteWithChildren
   AppConfigRoute: typeof AppConfigRoute
@@ -399,12 +438,14 @@ interface AppRouteChildren {
   AppPanelsRoute: typeof AppPanelsRoute
   AppReadinessRoute: typeof AppReadinessRoute
   AppReportsRoute: typeof AppReportsRoute
+  AppSettingsRoute: typeof AppSettingsRoute
   AppSubmitRoute: typeof AppSubmitRoute
   AppAdminSystemRoute: typeof AppAdminSystemRoute
   AppAdminUsersRoute: typeof AppAdminUsersRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAppearanceRoute: AppAppearanceRoute,
   AppAuditRoute: AppAuditRoute,
   AppCasesRoute: AppCasesRouteWithChildren,
   AppConfigRoute: AppConfigRoute,
@@ -416,6 +457,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppPanelsRoute: AppPanelsRoute,
   AppReadinessRoute: AppReadinessRoute,
   AppReportsRoute: AppReportsRoute,
+  AppSettingsRoute: AppSettingsRoute,
   AppSubmitRoute: AppSubmitRoute,
   AppAdminSystemRoute: AppAdminSystemRoute,
   AppAdminUsersRoute: AppAdminUsersRoute,

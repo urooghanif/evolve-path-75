@@ -117,11 +117,11 @@ const baseEvaluations = (stage: CaseStatus): Evaluation[] => {
   const out: Evaluation[] = [];
   const order: CaseStatus[] = ["dl_review", "lm_review", "hod_review", "panel_evaluation", "final_approval"];
   const rolesPerStage: Record<string, { reviewer: string; role: string }> = {
-    dl_review: { reviewer: "Sarah Chen", role: "Delivery Lead" },
-    lm_review: { reviewer: "David Park", role: "Line Manager" },
-    hod_review: { reviewer: "Priya Sharma", role: "Head of Engineering" },
+    dl_review: { reviewer: "Bilal Ahmad", role: "Delivery Lead" },
+    lm_review: { reviewer: "Usman Tariq", role: "Line Manager" },
+    hod_review: { reviewer: "Sana Malik", role: "Head of Engineering" },
     panel_evaluation: { reviewer: "Interview Panel", role: "Panel" },
-    final_approval: { reviewer: "Michael Torres", role: "Chief People Officer" },
+    final_approval: { reviewer: "Imran Siddiqui", role: "Chief People Officer" },
   };
   const stageIdx = order.indexOf(stage);
   const completed = stageIdx === -1 ? order.length : stageIdx;
@@ -160,13 +160,13 @@ const baseTimeline = (c: PromotionCase): TimelineEvent[] => {
   const events: TimelineEvent[] = [
     { date: "2026-01-04", time: "09:12", actor: c.employeeName, action: "Submitted promotion case", stage: "submitted" },
     { date: "2026-01-04", time: "09:13", actor: "System", action: "Eligibility checks passed (tenure, performance, last promotion)", stage: "submitted" },
-    { date: "2026-01-05", time: "11:40", actor: "Sarah Chen", action: "Endorsed — Delivery Lead review", stage: "dl_review", note: "Strong delivery record this cycle." },
+    { date: "2026-01-05", time: "11:40", actor: "Bilal Ahmad", action: "Endorsed — Delivery Lead review", stage: "dl_review", note: "Strong delivery record this cycle." },
   ];
   if (["lm_review", "hod_review", "interview_required", "panel_evaluation", "final_approval", "hr_validation", "completed"].includes(c.stage)) {
-    events.push({ date: "2026-01-08", time: "14:02", actor: "David Park", action: "Endorsed — Line Manager review", stage: "lm_review" });
+    events.push({ date: "2026-01-08", time: "14:02", actor: "Usman Tariq", action: "Endorsed — Line Manager review", stage: "lm_review" });
   }
   if (["hod_review", "interview_required", "panel_evaluation", "final_approval", "hr_validation", "completed"].includes(c.stage)) {
-    events.push({ date: "2026-01-12", time: "10:15", actor: "Priya Sharma", action: "Endorsed — HOD review", stage: "hod_review" });
+    events.push({ date: "2026-01-12", time: "10:15", actor: "Sana Malik", action: "Endorsed — HOD review", stage: "hod_review" });
   }
   if (c.rank16Plus) {
     events.push({ date: "2026-01-13", time: "09:00", actor: "System", action: "Interview required (Rank 16+ promotion)", stage: "interview_required" });
@@ -183,7 +183,7 @@ export function getCaseDetail(caseId: string): CaseDetail | undefined {
   const detail: CaseDetail = {
     ...base,
     employeeEmail: `${base.employeeName.toLowerCase().replace(/\s+/g, ".")}@company.com`,
-    managerName: "David Park",
+    managerName: "Usman Tariq",
     hireDate: "2019-08-15",
     tenureYears: 6.4,
     lastPromotion: "2024-04-01",
@@ -192,7 +192,7 @@ export function getCaseDetail(caseId: string): CaseDetail | undefined {
     timeline: baseTimeline(base),
     skills: baseSkills(),
     interviewScheduled: base.rank16Plus
-      ? { date: "2026-01-22", time: "15:00 IST", panel: ["James Wilson", "Priya Sharma", "External: Dr. R. Kapoor"] }
+      ? { date: "2026-01-22", time: "15:00 IST", panel: ["Hamza Sheikh", "Sana Malik", "External: Dr. Rashid Mahmood"] }
       : undefined,
     finalDecision:
       base.stage === "completed"
