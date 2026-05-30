@@ -21,8 +21,8 @@ const RANKS = Array.from({ length: 12 }).map((_, i) => ({
 }));
 
 const DEPTS = [
-  { id: "FE", name: "Front-End Dev", hod: "Priya Sharma", strength: 64 },
-  { id: "BE", name: "Back-End Dev", hod: "Lin Zhao", strength: 78 },
+  { id: "FE", name: "Front-End Dev", hod: "Sana Malik", strength: 64 },
+  { id: "BE", name: "Back-End Dev", hod: "Nadia Qureshi", strength: 78 },
   { id: "SQA", name: "SQA", hod: "Aisha Khan", strength: 41 },
   { id: "DO", name: "DevOps", hod: "Hassan Rauf", strength: 22 },
 ];

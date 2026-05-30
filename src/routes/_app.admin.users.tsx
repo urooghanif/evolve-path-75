@@ -16,12 +16,12 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/_app/admin/users")({ component: UsersPage });
 
 const USERS: { id: string; name: string; email: string; role: Role; dept: string; status: "active" | "invited" | "suspended"; lastSeen: string }[] = [
-  { id: "U-001", name: "Sarah Chen", email: "sarah.chen@co", role: "delivery_lead", dept: "Front-End", status: "active", lastSeen: "2m ago" },
-  { id: "U-002", name: "David Park", email: "david.park@co", role: "line_manager", dept: "Front-End", status: "active", lastSeen: "1h ago" },
-  { id: "U-003", name: "Priya Sharma", email: "priya.s@co", role: "hod", dept: "Engineering", status: "active", lastSeen: "4h ago" },
-  { id: "U-004", name: "James Wilson", email: "james.w@co", role: "panel_member", dept: "Engineering", status: "active", lastSeen: "Yesterday" },
-  { id: "U-005", name: "Michael Torres", email: "m.torres@co", role: "final_authority", dept: "People", status: "active", lastSeen: "30m ago" },
-  { id: "U-006", name: "Rahul Mehta", email: "rahul.m@co", role: "employee", dept: "Front-End", status: "active", lastSeen: "10m ago" },
+  { id: "U-001", name: "Bilal Ahmad", email: "bilal.ahmad@co", role: "delivery_lead", dept: "Front-End", status: "active", lastSeen: "2m ago" },
+  { id: "U-002", name: "Usman Tariq", email: "usman.tariq@co", role: "line_manager", dept: "Front-End", status: "active", lastSeen: "1h ago" },
+  { id: "U-003", name: "Sana Malik", email: "sana.malik@co", role: "hod", dept: "Engineering", status: "active", lastSeen: "4h ago" },
+  { id: "U-004", name: "Hamza Sheikh", email: "hamza.s@co", role: "panel_member", dept: "Engineering", status: "active", lastSeen: "Yesterday" },
+  { id: "U-005", name: "Imran Siddiqui", email: "imran.s@co", role: "final_authority", dept: "People", status: "active", lastSeen: "30m ago" },
+  { id: "U-006", name: "Ahmed Raza", email: "ahmed.raza@co", role: "employee", dept: "Front-End", status: "active", lastSeen: "10m ago" },
   { id: "U-007", name: "Aditi Verma", email: "aditi.v@co", role: "hr_admin", dept: "People", status: "active", lastSeen: "Just now" },
   { id: "U-008", name: "Carlos Mendoza", email: "c.mendoza@co", role: "auditor", dept: "Compliance", status: "active", lastSeen: "3d ago" },
   { id: "U-009", name: "Yuki Tanaka", email: "yuki.t@co", role: "employee", dept: "SQA", status: "suspended", lastSeen: "12d ago" },

@@ -13,15 +13,15 @@ export const Route = createFileRoute("/_app/audit")({ component: AuditPage });
 type EventType = "decision" | "submission" | "config" | "auth" | "security";
 
 const EVENTS: { id: string; ts: string; actor: string; role: string; type: EventType; action: string; target: string; ip: string }[] = [
-  { id: "EV-9012", ts: "2026-01-15 14:22:01", actor: "Sarah Chen", role: "Delivery Lead", type: "decision", action: "Endorsed promotion case", target: "PC-1002", ip: "10.42.1.18" },
+  { id: "EV-9012", ts: "2026-01-15 14:22:01", actor: "Bilal Ahmad", role: "Delivery Lead", type: "decision", action: "Endorsed promotion case", target: "PC-1002", ip: "10.42.1.18" },
   { id: "EV-9011", ts: "2026-01-15 13:48:55", actor: "System", role: "System", type: "security", action: "Failed login (3 attempts)", target: "u.test@co", ip: "203.81.4.21" },
-  { id: "EV-9010", ts: "2026-01-15 12:01:09", actor: "Michael Torres", role: "Final Authority", type: "decision", action: "Approved promotion", target: "PC-1008", ip: "10.42.4.7" },
-  { id: "EV-9009", ts: "2026-01-15 11:14:32", actor: "Priya Sharma", role: "HOD", type: "decision", action: "Deferred case for next cycle", target: "PC-1009", ip: "10.42.2.55" },
-  { id: "EV-9008", ts: "2026-01-15 10:42:11", actor: "Rahul Mehta", role: "Employee", type: "submission", action: "Submitted promotion case", target: "PC-1001", ip: "10.42.7.92" },
+  { id: "EV-9010", ts: "2026-01-15 12:01:09", actor: "Imran Siddiqui", role: "Final Authority", type: "decision", action: "Approved promotion", target: "PC-1008", ip: "10.42.4.7" },
+  { id: "EV-9009", ts: "2026-01-15 11:14:32", actor: "Sana Malik", role: "HOD", type: "decision", action: "Deferred case for next cycle", target: "PC-1009", ip: "10.42.2.55" },
+  { id: "EV-9008", ts: "2026-01-15 10:42:11", actor: "Ahmed Raza", role: "Employee", type: "submission", action: "Submitted promotion case", target: "PC-1001", ip: "10.42.7.92" },
   { id: "EV-9007", ts: "2026-01-15 09:30:00", actor: "HR Admin", role: "HR Admin", type: "config", action: "Updated eligibility policy", target: "min_tenure: 2y", ip: "10.42.1.2" },
   { id: "EV-9006", ts: "2026-01-14 18:22:43", actor: "System", role: "System", type: "security", action: "Role escalation attempt blocked", target: "u-emp-91", ip: "10.42.6.13" },
   { id: "EV-9005", ts: "2026-01-14 16:10:19", actor: "HR Admin", role: "HR Admin", type: "config", action: "Launched promotion cycle", target: "CY-2026-03", ip: "10.42.1.2" },
-  { id: "EV-9004", ts: "2026-01-14 15:01:55", actor: "James Wilson", role: "Panel Member", type: "decision", action: "Submitted panel evaluation", target: "PC-1005", ip: "10.42.4.18" },
+  { id: "EV-9004", ts: "2026-01-14 15:01:55", actor: "Hamza Sheikh", role: "Panel Member", type: "decision", action: "Submitted panel evaluation", target: "PC-1005", ip: "10.42.4.18" },
   { id: "EV-9003", ts: "2026-01-14 13:45:09", actor: "System Admin", role: "Sys Admin", type: "auth", action: "Created user account", target: "e.roberts@co", ip: "10.42.1.5" },
 ];
 

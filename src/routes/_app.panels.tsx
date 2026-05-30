@@ -18,18 +18,18 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/_app/panels")({ component: PanelsPage });
 
 const PANEL_POOL = [
-  { id: "P1", name: "James Wilson", role: "VP Engineering", expertise: ["System Design", "Leadership"], dept: "Engineering" },
-  { id: "P2", name: "Priya Sharma", role: "Head of Engineering", expertise: ["React", "Mentoring"], dept: "Front-End" },
-  { id: "P3", name: "Dr. R. Kapoor", role: "External Advisor", expertise: ["Architecture"], dept: "External" },
-  { id: "P4", name: "Lin Zhao", role: "Principal Engineer", expertise: ["Performance", "Back-End"], dept: "Back-End" },
+  { id: "P1", name: "Hamza Sheikh", role: "VP Engineering", expertise: ["System Design", "Leadership"], dept: "Engineering" },
+  { id: "P2", name: "Sana Malik", role: "Head of Engineering", expertise: ["React", "Mentoring"], dept: "Front-End" },
+  { id: "P3", name: "Dr. Rashid Mahmood", role: "External Advisor", expertise: ["Architecture"], dept: "External" },
+  { id: "P4", name: "Nadia Qureshi", role: "Principal Engineer", expertise: ["Performance", "Back-End"], dept: "Back-End" },
   { id: "P5", name: "Aisha Khan", role: "Director QA", expertise: ["SQA", "Automation"], dept: "SQA" },
-  { id: "P6", name: "Marco Silva", role: "Staff Engineer", expertise: ["TypeScript", "System Design"], dept: "Front-End" },
+  { id: "P6", name: "Tahir Bhatti", role: "Staff Engineer", expertise: ["TypeScript", "System Design"], dept: "Front-End" },
 ];
 
 const PANELS = [
-  { id: "PNL-01", case: "PC-1003", candidate: "Tom Bradley", date: "2026-01-22", time: "15:00 IST", mode: "Hybrid", room: "HQ 4B", members: ["James Wilson", "Priya Sharma", "Dr. R. Kapoor"], status: "scheduled" },
-  { id: "PNL-02", case: "PC-1005", candidate: "Marcus Lee", date: "2026-01-24", time: "11:00 IST", mode: "Virtual", room: "Zoom", members: ["Lin Zhao", "James Wilson"], status: "in_progress" },
-  { id: "PNL-03", case: "PC-1007", candidate: "Karan Singh", date: "2026-01-19", time: "16:30 IST", mode: "On-site", room: "HQ 2A", members: ["Priya Sharma", "Aisha Khan", "Marco Silva"], status: "completed" },
+  { id: "PNL-01", case: "PC-1003", candidate: "Bilal Hussain", date: "2026-01-22", time: "15:00 IST", mode: "Hybrid", room: "HQ 4B", members: ["Hamza Sheikh", "Sana Malik", "Dr. Rashid Mahmood"], status: "scheduled" },
+  { id: "PNL-02", case: "PC-1005", candidate: "Faisal Iqbal", date: "2026-01-24", time: "11:00 IST", mode: "Virtual", room: "Zoom", members: ["Nadia Qureshi", "Hamza Sheikh"], status: "in_progress" },
+  { id: "PNL-03", case: "PC-1007", candidate: "Zain Abbas", date: "2026-01-19", time: "16:30 IST", mode: "On-site", room: "HQ 2A", members: ["Sana Malik", "Aisha Khan", "Tahir Bhatti"], status: "completed" },
 ];
 
 function PanelsPage() {
