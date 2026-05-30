@@ -117,11 +117,11 @@ const baseEvaluations = (stage: CaseStatus): Evaluation[] => {
   const out: Evaluation[] = [];
   const order: CaseStatus[] = ["dl_review", "lm_review", "hod_review", "panel_evaluation", "final_approval"];
   const rolesPerStage: Record<string, { reviewer: string; role: string }> = {
-    dl_review: { reviewer: "Sarah Chen", role: "Delivery Lead" },
-    lm_review: { reviewer: "David Park", role: "Line Manager" },
-    hod_review: { reviewer: "Priya Sharma", role: "Head of Engineering" },
+    dl_review: { reviewer: "Bilal Ahmad", role: "Delivery Lead" },
+    lm_review: { reviewer: "Usman Tariq", role: "Line Manager" },
+    hod_review: { reviewer: "Sana Malik", role: "Head of Engineering" },
     panel_evaluation: { reviewer: "Interview Panel", role: "Panel" },
-    final_approval: { reviewer: "Michael Torres", role: "Chief People Officer" },
+    final_approval: { reviewer: "Imran Siddiqui", role: "Chief People Officer" },
   };
   const stageIdx = order.indexOf(stage);
   const completed = stageIdx === -1 ? order.length : stageIdx;
