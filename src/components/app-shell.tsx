@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Bell, LogOut } from "lucide-react";
+import { Bell, LogOut, Settings, Palette } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { ROLE_LABELS, ROLE_NAV } from "@/lib/roles";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,11 @@ import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
+
+const GLOBAL_NAV = [
+  { to: "/settings", label: "Settings", icon: Settings },
+  { to: "/appearance", label: "Appearance", icon: Palette },
+];
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { user, logout } = useAuth();
