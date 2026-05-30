@@ -47,6 +47,25 @@ export function AppShell({ children }: { children: ReactNode }) {
               </Link>
             );
           })}
+          <div className="pt-3 mt-3 border-t border-hairline-soft space-y-0.5">
+            {GLOBAL_NAV.map((item) => {
+              const Icon = item.icon;
+              const active = pathname.startsWith(item.to);
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={cn(
+                    "flex items-center gap-3 px-3 h-10 rounded-md text-sm font-medium transition-colors",
+                    active ? "bg-surface-strong text-ink" : "text-body hover:bg-surface-soft hover:text-ink",
+                  )}
+                >
+                  <Icon className="h-4 w-4" />
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
         </nav>
         <div className="p-3 border-t border-hairline">
           <div className="flex items-center gap-3 px-2 py-2">
