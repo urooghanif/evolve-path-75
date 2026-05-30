@@ -21,14 +21,15 @@ export function AppShell({ children }: { children: ReactNode }) {
   const nav = ROLE_NAV[user.role];
 
   return (
-    <div className="min-h-screen flex bg-canvas">
-      {/* Sidebar */}
-      <aside className="hidden md:flex w-64 shrink-0 flex-col border-r border-hairline bg-canvas">
-        <div className="h-16 px-6 flex items-center gap-2 border-b border-hairline">
+    <div className="h-screen flex bg-canvas overflow-hidden">
+      {/* Sidebar — fixed full-height */}
+      <aside className="hidden md:flex w-64 shrink-0 flex-col border-r border-hairline bg-canvas h-screen sticky top-0">
+        <div className="h-16 px-6 flex items-center gap-2 border-b border-hairline shrink-0">
           <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">P</div>
           <span className="title-md tracking-tight">Promote</span>
         </div>
-        <nav className="flex-1 py-4 px-3 space-y-0.5">
+        <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-0.5">
+
           {nav.map((item) => {
             const Icon = item.icon;
             const active = pathname === item.to || (item.to !== "/dashboard" && pathname.startsWith(item.to));
