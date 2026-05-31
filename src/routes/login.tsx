@@ -225,22 +225,22 @@ function Login() {
                 { i: <Sparkles className="h-4 w-4" />, t: "AI scoring & rewrite", s: "Score achievements and suggest skill gaps" },
                 { i: <ShieldCheck className="h-4 w-4" />, t: "Immutable audit trail", s: "Every decision tracked, every change logged" },
               ].map((f) => (
-                <div key={f.t} className="flex items-center gap-3 p-3 rounded-2xl bg-white/10 backdrop-blur border border-white/15">
-                  <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">{f.i}</div>
+                <div key={f.t} className="flex items-center gap-3 p-3 rounded-2xl bg-white/15 backdrop-blur border border-white/25">
+                  <div className="w-9 h-9 rounded-xl bg-white/25 flex items-center justify-center text-white">{f.i}</div>
                   <div className="min-w-0">
-                    <div className="text-sm font-semibold text-on-dark truncate">{f.t}</div>
-                    <div className="text-xs text-on-dark-soft truncate">{f.s}</div>
+                    <div className="text-sm font-semibold text-white truncate">{f.t}</div>
+                    <div className="text-xs text-white/85 truncate">{f.s}</div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="flex items-center justify-between text-xs text-on-dark-soft">
+            <div className="flex items-center justify-between text-xs text-white/85">
               <span>Trusted by HR teams in Pakistan</span>
-              <div className="flex items-center gap-3 opacity-80">
-                <span className="font-semibold tracking-widest">SOC2</span>
+              <div className="flex items-center gap-3">
+                <span className="font-semibold tracking-widest text-white">SOC2</span>
                 <span>·</span>
-                <span className="font-semibold tracking-widest">ISO 27001</span>
+                <span className="font-semibold tracking-widest text-white">ISO 27001</span>
               </div>
             </div>
           </div>
