@@ -11,6 +11,7 @@ import { STATUS_LABEL, type CaseStatus } from "@/lib/mock-data";
 import { useAuth } from "@/lib/auth";
 import { Search, Download, ArrowUpRight, AlertTriangle, Filter } from "lucide-react";
 import { ROLE_LABELS } from "@/lib/roles";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/_app/cases")({ component: CasesPage });
 
