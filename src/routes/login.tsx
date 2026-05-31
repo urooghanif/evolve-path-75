@@ -58,8 +58,8 @@ function Login() {
   const activeRole = watch("role");
 
   return (
-    <div className="min-h-screen bg-[#eef0f4] flex items-center justify-center p-4 lg:p-8">
-      <div className="w-full max-w-[1240px] grid lg:grid-cols-2 bg-canvas rounded-[28px] shadow-[0_30px_80px_-30px_rgba(15,23,42,0.25)] overflow-hidden border border-hairline">
+    <div className="h-screen w-screen overflow-hidden bg-[#eef0f4] flex items-center justify-center p-3 lg:p-6">
+      <div className="w-full max-w-[1240px] h-full max-h-[860px] grid lg:grid-cols-2 bg-canvas rounded-[28px] shadow-[0_30px_80px_-30px_rgba(15,23,42,0.25)] overflow-hidden border border-hairline">
         {/* LEFT — Form */}
         <div className="p-8 sm:p-12 lg:p-14 flex flex-col">
           <div className="flex items-center gap-2 mb-12">
