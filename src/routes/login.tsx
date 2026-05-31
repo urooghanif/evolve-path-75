@@ -58,11 +58,11 @@ function Login() {
   const activeRole = watch("role");
 
   return (
-    <div className="min-h-screen bg-[#eef0f4] flex items-center justify-center p-4 lg:p-8">
-      <div className="w-full max-w-[1240px] grid lg:grid-cols-2 bg-canvas rounded-[28px] shadow-[0_30px_80px_-30px_rgba(15,23,42,0.25)] overflow-hidden border border-hairline">
+    <div className="h-screen w-screen overflow-hidden bg-[#eef0f4] flex items-center justify-center p-3 lg:p-6">
+      <div className="w-full max-w-[1240px] h-full max-h-[860px] grid lg:grid-cols-2 bg-canvas rounded-[28px] shadow-[0_30px_80px_-30px_rgba(15,23,42,0.25)] overflow-hidden border border-hairline">
         {/* LEFT — Form */}
-        <div className="p-8 sm:p-12 lg:p-14 flex flex-col">
-          <div className="flex items-center gap-2 mb-12">
+        <div className="p-6 sm:p-8 lg:p-10 flex flex-col overflow-y-auto">
+          <div className="flex items-center gap-2 mb-6">
             <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white font-bold">P</div>
             <div>
               <div className="title-md leading-none">Promote</div>
@@ -180,7 +180,7 @@ function Login() {
             </form>
           </div>
 
-          <div className="text-xs text-muted-cb mt-10 flex items-center justify-between">
+          <div className="text-xs text-muted-cb mt-6 flex items-center justify-between">
             <span>© 2026 Promote</span>
             <span>Demo environment · Pakistan</span>
           </div>
@@ -193,7 +193,7 @@ function Login() {
             <div className="absolute -top-20 -left-20 w-[480px] h-[480px] rounded-full bg-[radial-gradient(circle_at_30%_30%,#a5b0ff,transparent_60%)] blur-2xl animate-[float_14s_ease-in-out_infinite]" />
             <div className="absolute top-1/3 -right-24 w-[520px] h-[520px] rounded-full bg-[radial-gradient(circle_at_60%_40%,#7c83ff,transparent_55%)] blur-2xl animate-[float_18s_ease-in-out_infinite_reverse]" />
             <div className="absolute -bottom-32 left-1/4 w-[460px] h-[460px] rounded-full bg-[radial-gradient(circle_at_40%_60%,#c7cdff,transparent_60%)] blur-2xl animate-[float_22s_ease-in-out_infinite]" />
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-[#1a1de8]/40" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1a1de8]/50 via-[#3a3df5]/30 to-[#0d10b8]/60" />
             {/* Grain */}
             <div
               className="absolute inset-0 opacity-[0.08] mix-blend-overlay"
@@ -204,16 +204,16 @@ function Login() {
             />
           </div>
 
-          <div className="relative h-full p-12 xl:p-14 flex flex-col justify-between">
+          <div className="relative h-full p-8 xl:p-12 flex flex-col justify-between">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur text-xs font-medium border border-white/20">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur text-xs font-semibold text-white border border-white/30">
                 <Sparkles className="h-3.5 w-3.5" /> AI-assisted promotion workflows
               </div>
-              <h2 className="display-xl text-on-dark mt-8 leading-[1.05]">
+              <h2 className="display-xl text-white mt-6 leading-[1.05] drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
                 Start your<br />promotion<br />
                 <span className="italic font-light">journey with us.</span>
               </h2>
-              <p className="mt-6 text-on-dark-soft max-w-md leading-relaxed">
+              <p className="mt-5 text-white/90 max-w-md leading-relaxed">
                 One disciplined workflow for eligibility, achievements, evaluations and final approvals — auditable end-to-end across all nine roles.
               </p>
             </div>
@@ -225,22 +225,22 @@ function Login() {
                 { i: <Sparkles className="h-4 w-4" />, t: "AI scoring & rewrite", s: "Score achievements and suggest skill gaps" },
                 { i: <ShieldCheck className="h-4 w-4" />, t: "Immutable audit trail", s: "Every decision tracked, every change logged" },
               ].map((f) => (
-                <div key={f.t} className="flex items-center gap-3 p-3 rounded-2xl bg-white/10 backdrop-blur border border-white/15">
-                  <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">{f.i}</div>
+                <div key={f.t} className="flex items-center gap-3 p-3 rounded-2xl bg-white/15 backdrop-blur border border-white/25">
+                  <div className="w-9 h-9 rounded-xl bg-white/25 flex items-center justify-center text-white">{f.i}</div>
                   <div className="min-w-0">
-                    <div className="text-sm font-semibold text-on-dark truncate">{f.t}</div>
-                    <div className="text-xs text-on-dark-soft truncate">{f.s}</div>
+                    <div className="text-sm font-semibold text-white truncate">{f.t}</div>
+                    <div className="text-xs text-white/85 truncate">{f.s}</div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="flex items-center justify-between text-xs text-on-dark-soft">
+            <div className="flex items-center justify-between text-xs text-white/85">
               <span>Trusted by HR teams in Pakistan</span>
-              <div className="flex items-center gap-3 opacity-80">
-                <span className="font-semibold tracking-widest">SOC2</span>
+              <div className="flex items-center gap-3">
+                <span className="font-semibold tracking-widest text-white">SOC2</span>
                 <span>·</span>
-                <span className="font-semibold tracking-widest">ISO 27001</span>
+                <span className="font-semibold tracking-widest text-white">ISO 27001</span>
               </div>
             </div>
           </div>

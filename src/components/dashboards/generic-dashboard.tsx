@@ -49,16 +49,22 @@ export function GenericDashboard() {
               <TableHead>Department</TableHead>
               <TableHead>Stage</TableHead>
               <TableHead className="text-right">Days</TableHead>
+              <TableHead className="text-right"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {mine.map((c) => (
-              <TableRow key={c.id}>
+              <TableRow key={c.id} className="hover:bg-surface-soft">
                 <TableCell className="font-mono text-sm">{c.id}</TableCell>
                 <TableCell>{c.employeeName}</TableCell>
                 <TableCell className="text-body">{c.department}</TableCell>
                 <TableCell><StatusBadge status={c.stage} /></TableCell>
                 <TableCell className="text-right tabular">{c.daysInStage}</TableCell>
+                <TableCell className="text-right">
+                  <Button asChild size="sm" variant="ghost">
+                    <Link to="/cases/$caseId" params={{ caseId: c.id }}>Open <ArrowUpRight className="h-3.5 w-3.5" /></Link>
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

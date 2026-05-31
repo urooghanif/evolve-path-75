@@ -11,6 +11,7 @@ import { STATUS_LABEL, type CaseStatus } from "@/lib/mock-data";
 import { useAuth } from "@/lib/auth";
 import { Search, Download, ArrowUpRight, AlertTriangle, Filter } from "lucide-react";
 import { ROLE_LABELS } from "@/lib/roles";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/_app/cases")({ component: CasesPage });
 
@@ -49,8 +50,17 @@ function CasesPage() {
           <p className="text-body mt-2">{filtered.length} of {cases.length} cases</p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline"><Download className="h-4 w-4" /> Export CSV</Button>
-          {user.role === "hr_admin" && <Button>Bulk reassign</Button>}
+          <Button variant="outline" onClick={() => {
+            const header = "Case,Employee,Department,Rank,Designation,Stage,Days\n";
+            const rows = filtered.map((c) => `${c.id},${c.employeeName},${c.department},${c.currentRank}->${c.proposedRank},${c.proposedDesignation},${c.stage},${c.daysInStage}`).join("\n");
+            const blob = new Blob([header + rows], { type: "text/csv" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url; a.download = `cases-${Date.now()}.csv`; a.click();
+            URL.revokeObjectURL(url);
+            toast.success(`Exported ${filtered.length} cases to CSV`);
+          }}><Download className="h-4 w-4" /> Export CSV</Button>
+          {user.role === "hr_admin" && <Button onClick={() => toast.info("Bulk reassign opened — pick a target reviewer.")}>Bulk reassign</Button>}
         </div>
       </div>
 

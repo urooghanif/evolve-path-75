@@ -84,8 +84,13 @@ export const ROLE_NAV: Record<Role, NavItem[]> = {
   ],
   system_admin: [
     { to: "/admin/users", label: "Users & Roles", icon: Users },
+    { to: "/cases", label: "Promotion Cases", icon: Briefcase },
     { to: "/config", label: "Master Data", icon: Settings },
     { to: "/admin/system", label: "System Settings", icon: ShieldCheck },
+    { to: "/audit", label: "Audit Trail", icon: History },
   ],
-  auditor: [{ to: "/audit", label: "Audit Trail", icon: FileCheck }],
+  auditor: [
+    { to: "/cases", label: "Promotion Cases", icon: Briefcase },
+    { to: "/audit", label: "Audit Trail", icon: FileCheck },
+  ],
 };
