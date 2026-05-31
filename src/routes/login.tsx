@@ -193,7 +193,7 @@ function Login() {
             <div className="absolute -top-20 -left-20 w-[480px] h-[480px] rounded-full bg-[radial-gradient(circle_at_30%_30%,#a5b0ff,transparent_60%)] blur-2xl animate-[float_14s_ease-in-out_infinite]" />
             <div className="absolute top-1/3 -right-24 w-[520px] h-[520px] rounded-full bg-[radial-gradient(circle_at_60%_40%,#7c83ff,transparent_55%)] blur-2xl animate-[float_18s_ease-in-out_infinite_reverse]" />
             <div className="absolute -bottom-32 left-1/4 w-[460px] h-[460px] rounded-full bg-[radial-gradient(circle_at_40%_60%,#c7cdff,transparent_60%)] blur-2xl animate-[float_22s_ease-in-out_infinite]" />
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-[#1a1de8]/40" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1a1de8]/50 via-[#3a3df5]/30 to-[#0d10b8]/60" />
             {/* Grain */}
             <div
               className="absolute inset-0 opacity-[0.08] mix-blend-overlay"
