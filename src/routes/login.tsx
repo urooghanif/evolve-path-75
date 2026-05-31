@@ -180,7 +180,7 @@ function Login() {
             </form>
           </div>
 
-          <div className="text-xs text-muted-cb mt-10 flex items-center justify-between">
+          <div className="text-xs text-muted-cb mt-6 flex items-center justify-between">
             <span>© 2026 Promote</span>
             <span>Demo environment · Pakistan</span>
           </div>
