@@ -177,11 +177,12 @@ export function HrDashboard() {
               <th className="px-6 py-3">Stage</th>
               <th className="px-6 py-3">Days</th>
               <th className="px-6 py-3">Flag</th>
+              <th className="px-6 py-3 text-right"></th>
             </tr>
           </thead>
           <tbody>
             {CASES.slice(0, 7).map((c) => (
-              <tr key={c.id} className="border-t border-hairline-soft">
+              <tr key={c.id} className="border-t border-hairline-soft hover:bg-surface-soft transition-colors">
                 <td className="px-6 py-4 font-mono">{c.id}</td>
                 <td className="px-6 py-4">{c.employeeName}</td>
                 <td className="px-6 py-4 text-body">{c.department}</td>
@@ -189,6 +190,11 @@ export function HrDashboard() {
                 <td className="px-6 py-4"><StatusBadge status={c.stage} /></td>
                 <td className="px-6 py-4 tabular">{c.daysInStage}</td>
                 <td className="px-6 py-4">{c.overdue && <Badge variant="destructive">Overdue</Badge>}</td>
+                <td className="px-6 py-4 text-right">
+                  <Button asChild size="sm" variant="ghost">
+                    <Link to="/cases/$caseId" params={{ caseId: c.id }}>Open <ArrowUpRight className="h-3.5 w-3.5" /></Link>
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>
