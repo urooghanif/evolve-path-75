@@ -204,16 +204,16 @@ function Login() {
             />
           </div>
 
-          <div className="relative h-full p-12 xl:p-14 flex flex-col justify-between">
+          <div className="relative h-full p-8 xl:p-12 flex flex-col justify-between">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur text-xs font-medium border border-white/20">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur text-xs font-semibold text-white border border-white/30">
                 <Sparkles className="h-3.5 w-3.5" /> AI-assisted promotion workflows
               </div>
-              <h2 className="display-xl text-on-dark mt-8 leading-[1.05]">
+              <h2 className="display-xl text-white mt-6 leading-[1.05] drop-shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
                 Start your<br />promotion<br />
                 <span className="italic font-light">journey with us.</span>
               </h2>
-              <p className="mt-6 text-on-dark-soft max-w-md leading-relaxed">
+              <p className="mt-5 text-white/90 max-w-md leading-relaxed">
                 One disciplined workflow for eligibility, achievements, evaluations and final approvals — auditable end-to-end across all nine roles.
               </p>
             </div>
