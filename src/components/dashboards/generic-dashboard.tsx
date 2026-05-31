@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { CASES } from "@/lib/mock-data";
 import { StatusBadge } from "@/components/status-badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Link } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
 
 export function GenericDashboard() {
   const { user } = useAuth();
@@ -18,7 +20,7 @@ export function GenericDashboard() {
           <p className="caption-strong text-muted-cb">{ROLE_LABELS[user.role]}</p>
           <h1 className="display-md mt-2">Welcome, {user.name.split(" ")[0]}.</h1>
         </div>
-        <Button>Open queue</Button>
+        <Button asChild><Link to="/cases">Open queue <ArrowUpRight className="h-4 w-4" /></Link></Button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
