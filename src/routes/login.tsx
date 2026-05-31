@@ -61,8 +61,8 @@ function Login() {
     <div className="h-screen w-screen overflow-hidden bg-[#eef0f4] flex items-center justify-center p-3 lg:p-6">
       <div className="w-full max-w-[1240px] h-full max-h-[860px] grid lg:grid-cols-2 bg-canvas rounded-[28px] shadow-[0_30px_80px_-30px_rgba(15,23,42,0.25)] overflow-hidden border border-hairline">
         {/* LEFT — Form */}
-        <div className="p-8 sm:p-12 lg:p-14 flex flex-col">
-          <div className="flex items-center gap-2 mb-12">
+        <div className="p-6 sm:p-8 lg:p-10 flex flex-col overflow-y-auto">
+          <div className="flex items-center gap-2 mb-6">
             <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white font-bold">P</div>
             <div>
               <div className="title-md leading-none">Promote</div>
