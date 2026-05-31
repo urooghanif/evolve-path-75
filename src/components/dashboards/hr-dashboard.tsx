@@ -165,7 +165,7 @@ export function HrDashboard() {
             <h3 className="title-md">Recent promotion cases</h3>
             <p className="text-sm text-body mt-1">Latest activity across the cycle.</p>
           </div>
-          <Button variant="outline" size="sm">View all</Button>
+          <Button asChild variant="outline" size="sm"><Link to="/cases">View all <ArrowUpRight className="h-4 w-4" /></Link></Button>
         </div>
         <table className="w-full text-sm">
           <thead className="bg-surface-soft">
