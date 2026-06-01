@@ -91,9 +91,10 @@ function MyAchievementsPage() {
         </div>
         <Tabs value={tab} onValueChange={setTab}>
           <TabsList className="bg-surface-soft rounded-full p-1">
-            {(["all","draft","submitted","reviewed","approved"] as const).map((t) => (
-              <TabsTrigger key={t} value={t} className="rounded-full px-4 h-8 data-[state=active]:bg-ink data-[state=active]:text-white capitalize">{t}</TabsTrigger>
+            {(["all","draft","dl_review","lm_review","returned","validated","rejected","archived"] as const).map((t) => (
+              <TabsTrigger key={t} value={t} className="rounded-full px-3 h-8 data-[state=active]:bg-ink data-[state=active]:text-white text-xs whitespace-nowrap">{t === "all" ? "All" : STATUS_META[t as Status].label}</TabsTrigger>
             ))}
+
           </TabsList>
         </Tabs>
       </Card>
