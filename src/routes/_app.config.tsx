@@ -85,7 +85,7 @@ function ConfigPage() {
 
       <Tabs defaultValue="ranks">
         <TabsList className="bg-surface-soft p-1 rounded-full flex flex-wrap h-auto">
-          {[["ranks", "Ranks"], ["departments", "Departments"], ["rules", "Rule Declaration"], ["skills", "Skills"], ["categories", "Achievement categories"], ["policy", "Eligibility policy"], ["templates", "Letter templates"]].map(([v, l]) => (
+          {[["ranks", "Ranks"], ["departments", "Departments"], ["careers", "Career tracks"], ["rules", "Rule Declaration"], ["skills", "Skills"], ["categories", "Achievement categories"], ["policy", "Eligibility policy"], ["templates", "Letter templates"]].map(([v, l]) => (
             <TabsTrigger key={v} value={v} className="rounded-full data-[state=active]:bg-ink data-[state=active]:text-white px-4 h-9">{l}</TabsTrigger>
           ))}
         </TabsList>
