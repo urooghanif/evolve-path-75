@@ -140,6 +140,53 @@ function ConfigPage() {
           </div>
         </TabsContent>
 
+        <TabsContent value="careers" className="mt-6 space-y-6">
+          <Card className="p-6 bg-primary/5 border-primary/20">
+            <h3 className="title-md">Career-track → role / rank mapping (UC-014)</h3>
+            <p className="text-sm text-body mt-1">
+              Derive proposed rank and designation from each career track's milestone (3 / 5 / 7 / 9 years total eligible experience).
+              Rank 16 and above auto-flags as Interview Required.
+            </p>
+          </Card>
+
+          {CAREER_TRACKS.map((t) => (
+            <Card key={t.track} className="overflow-hidden">
+              <div className="p-6 border-b border-hairline flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Badge variant="muted" className="font-mono normal-case">{t.track}</Badge>
+                  <h3 className="title-md">{t.track} career track</h3>
+                </div>
+                <Button variant="outline" size="sm"><Pencil className="h-4 w-4" /> Edit mapping</Button>
+              </div>
+              <table className="w-full text-sm">
+                <thead className="bg-surface-soft">
+                  <tr className="text-left text-[11px] uppercase tracking-wide text-muted-cb">
+                    <th className="px-6 py-3">Milestone</th>
+                    <th className="px-6 py-3">Target designation</th>
+                    <th className="px-6 py-3">Target rank</th>
+                    <th className="px-6 py-3">Interview required</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {t.rows.map((r) => (
+                    <tr key={r.milestone} className="border-t border-hairline-soft">
+                      <td className="px-6 py-4 font-semibold">{r.milestone}</td>
+                      <td className="px-6 py-4">{r.designation}</td>
+                      <td className="px-6 py-4 tabular">R{r.rank}</td>
+                      <td className="px-6 py-4">
+                        {r.interview
+                          ? <Badge variant="warning">Required (5-member panel)</Badge>
+                          : <Badge variant="muted">Not required</Badge>}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Card>
+          ))}
+        </TabsContent>
+
+
         <TabsContent value="rules" className="mt-6">
           <Card className="overflow-hidden">
             <div className="p-6 border-b border-hairline flex justify-between items-center">
