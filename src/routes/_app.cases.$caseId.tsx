@@ -120,14 +120,26 @@ function CaseDetailPage() {
               </Card>
 
               <Card className="p-6">
-                <h3 className="title-md mb-4 flex items-center gap-2"><Sparkles className="h-4 w-4 text-primary" /> AI case summary</h3>
+                <h3 className="title-md mb-4 flex items-center gap-2"><Sparkles className="h-4 w-4 text-primary" /> AI candidate summary</h3>
                 <div className="rounded-2xl bg-surface-soft p-5 text-sm leading-relaxed">
                   Candidate demonstrates <strong>consistent above-bar delivery</strong> across 3 quarters with measurable
                   revenue and quality impact. Mentoring footprint is strong (18 mentees, 9 downstream promotions).
                   Primary growth area is <strong>executive stakeholder management</strong>; recommend continued exposure
                   to QBRs over the next two quarters. Overall AI readiness score: <strong>87 / 100</strong>.
                 </div>
+                <p className="text-[11px] text-muted-cb mt-3">Visible to HRBP, HOD, Final Authority and C-Level reviewers.</p>
               </Card>
+
+              {["hod_review","interview_required","panel_evaluation","final_approval","hr_validation","completed"].includes(c.stage) && (
+                <Card className="p-6 border-primary/30">
+                  <h3 className="title-md mb-4 flex items-center gap-2"><MessageSquare className="h-4 w-4 text-primary" /> AI feedback summary (HOD onwards)</h3>
+                  <div className="rounded-2xl bg-primary/5 p-5 text-sm leading-relaxed space-y-3">
+                    <p><strong>Consolidated reviewer signal:</strong> 3 of 3 prior approvers endorsed with average rating 4.3/5. Sentiment across written comments is <strong>strongly positive</strong> on delivery and mentoring; <strong>neutral-to-cautious</strong> on executive presence.</p>
+                    <p><strong>Common themes:</strong> Performance under pressure, ownership of platform reliability, structured mentoring program. <strong>Concerns raised:</strong> Limited exposure to board-level forums (1 reviewer).</p>
+                    <p className="text-xs text-muted-cb">AI-generated from {c.evaluations.filter(e => e.decision !== "pending").length} reviewer note(s). For decision support only — does not replace human judgement.</p>
+                  </div>
+                </Card>
+              )}
             </TabsContent>
 
             {/* Achievements */}
@@ -296,6 +308,19 @@ function CaseDetailPage() {
         <div className="space-y-4">
           {canReview ? (
             <ReviewActionPanel role={canReview} caseId={c.id} />
+          ) : user.role === "hr_admin" ? (
+            <Card className="p-6 border-warning/40 ring-1 ring-warning/20">
+              <div className="flex items-center gap-2 mb-1">
+                <ShieldOverrideIcon /> <span className="caption-strong text-warning">HRBP override authority</span>
+              </div>
+              <h3 className="title-md mb-2">Override or reassign</h3>
+              <p className="text-sm text-body mb-4">As HRBP you may override a stuck stage, reassign the reviewer, or fast-track this case. All overrides are written to the audit trail.</p>
+              <div className="space-y-2">
+                <Button className="w-full" variant="outline" onClick={() => toast.success("Reviewer reassigned")}>Reassign reviewer</Button>
+                <Button className="w-full" variant="outline" onClick={() => toast.success("Stage skipped — audit logged")}>Override & advance stage</Button>
+                <Button className="w-full" variant="destructive" onClick={() => toast.success("Case withdrawn — audit logged")}>Withdraw case</Button>
+              </div>
+            </Card>
           ) : (
             <Card className="p-6">
               <h3 className="title-md">Your access</h3>
