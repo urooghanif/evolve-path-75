@@ -16,6 +16,7 @@ import {
   History,
   Sparkles,
   Building2,
+  Crown,
 } from "lucide-react";
 
 export type Role =
@@ -26,17 +27,19 @@ export type Role =
   | "hod"
   | "panel_member"
   | "final_authority"
+  | "c_level"
   | "system_admin"
   | "auditor";
 
 export const ROLE_LABELS: Record<Role, string> = {
-  hr_admin: "HR Admin",
+  hr_admin: "HRBP (HR Business Partner)",
   employee: "Employee",
   delivery_lead: "Delivery Lead",
   line_manager: "Line Manager",
   hod: "Head of Department",
   panel_member: "Interview Panel Member",
   final_authority: "Final Approval Authority",
+  c_level: "C-Level Executive",
   system_admin: "System Administrator",
   auditor: "Auditor / Viewer",
 };
@@ -51,6 +54,7 @@ export const ROLE_NAV: Record<Role, NavItem[]> = {
     { to: "/cases", label: "Promotion Cases", icon: Briefcase },
     { to: "/panels", label: "Interview Panels", icon: Users },
     { to: "/letters", label: "Letters", icon: FileCheck },
+    { to: "/admin/users", label: "HR Roles & Permissions", icon: ShieldCheck },
     { to: "/reports", label: "Reports", icon: ScrollText },
     { to: "/config", label: "Configuration", icon: Settings },
     { to: "/audit", label: "Audit Trail", icon: History },
@@ -60,6 +64,7 @@ export const ROLE_NAV: Record<Role, NavItem[]> = {
     { to: "/submit", label: "Submit Achievements", icon: FilePlus },
     { to: "/my-achievements", label: "My Achievements", icon: Award },
     { to: "/readiness", label: "Readiness Analysis", icon: Sparkles },
+    { to: "/cases", label: "My Promotion Case", icon: Briefcase },
   ],
   delivery_lead: [
     { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -67,7 +72,10 @@ export const ROLE_NAV: Record<Role, NavItem[]> = {
   ],
   line_manager: [
     { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { to: "/cases", label: "My Cases", icon: ClipboardList },
+    { to: "/cases", label: "Team Cases", icon: ClipboardList },
+    { to: "/submit", label: "My Submission", icon: FilePlus },
+    { to: "/my-achievements", label: "My Achievements", icon: Award },
+    { to: "/readiness", label: "My Readiness", icon: Sparkles },
   ],
   hod: [
     { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -81,6 +89,11 @@ export const ROLE_NAV: Record<Role, NavItem[]> = {
     { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { to: "/cases", label: "Pending Approvals", icon: Gavel },
     { to: "/letters", label: "Letters", icon: FileCheck },
+  ],
+  c_level: [
+    { to: "/dashboard", label: "Executive Dashboard", icon: Crown },
+    { to: "/cases", label: "C-Level Approvals", icon: Gavel },
+    { to: "/reports", label: "Org Reports", icon: ScrollText },
   ],
   system_admin: [
     { to: "/admin/users", label: "Users & Roles", icon: Users },
