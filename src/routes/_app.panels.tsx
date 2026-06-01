@@ -83,21 +83,33 @@ function PanelsPage() {
                 <div><Label>Room / link</Label><Input placeholder="HQ 4B or URL" className="mt-2" /></div>
               </div>
               <div>
-                <Label>Panel members ({selected.length} selected · min 3)</Label>
+                <Label className={`flex items-center justify-between ${selected.length === 5 ? "text-success" : ""}`}>
+                  <span>Panel members ({selected.length} / 5)</span>
+                  {selected.length === 5
+                    ? <Badge variant="success">Quorum met</Badge>
+                    : <Badge variant={selected.length > 5 ? "destructive" : "warning"}>
+                        {selected.length > 5 ? `Remove ${selected.length - 5}` : `Add ${5 - selected.length}`}
+                      </Badge>}
+                </Label>
+                <p className="text-xs text-muted-cb mt-1">Rank 16+ business rule — exactly 5 panel members required (UC-007).</p>
                 <div className="mt-2 space-y-2 max-h-72 overflow-y-auto pr-1">
-                  {PANEL_POOL.map((p) => (
-                    <label key={p.id} className="flex items-start gap-3 p-3 rounded-lg border border-hairline hover:bg-surface-soft cursor-pointer">
-                      <Checkbox checked={selected.includes(p.name)} onCheckedChange={() => toggleMember(p.name)} className="mt-1" />
-                      <Avatar className="h-9 w-9"><AvatarFallback className="bg-surface-strong text-xs">{p.name.split(" ").map((n) => n[0]).join("")}</AvatarFallback></Avatar>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-semibold">{p.name}</div>
-                        <div className="text-xs text-muted-cb">{p.role} · {p.dept}</div>
-                        <div className="mt-1 flex flex-wrap gap-1">
-                          {p.expertise.map((e) => <Badge key={e} variant="muted" className="text-[10px]">{e}</Badge>)}
+                  {PANEL_POOL.map((p) => {
+                    const isChecked = selected.includes(p.name);
+                    const blocked = !isChecked && selected.length >= 5;
+                    return (
+                      <label key={p.id} className={`flex items-start gap-3 p-3 rounded-lg border border-hairline transition-colors ${blocked ? "opacity-50 cursor-not-allowed" : "hover:bg-surface-soft cursor-pointer"}`}>
+                        <Checkbox checked={isChecked} disabled={blocked} onCheckedChange={() => !blocked && toggleMember(p.name)} className="mt-1" />
+                        <Avatar className="h-9 w-9"><AvatarFallback className="bg-surface-strong text-xs">{p.name.split(" ").map((n) => n[0]).join("")}</AvatarFallback></Avatar>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-semibold">{p.name}</div>
+                          <div className="text-xs text-muted-cb">{p.role} · {p.dept}</div>
+                          <div className="mt-1 flex flex-wrap gap-1">
+                            {p.expertise.map((e) => <Badge key={e} variant="muted" className="text-[10px]">{e}</Badge>)}
+                          </div>
                         </div>
-                      </div>
-                    </label>
-                  ))}
+                      </label>
+                    );
+                  })}
                 </div>
               </div>
               <div>
@@ -106,14 +118,16 @@ function PanelsPage() {
               </div>
               <Button
                 className="w-full"
+                disabled={selected.length !== 5 || !caseId}
                 onClick={() => {
                   if (!caseId) return toast.error("Select a case.");
-                  if (selected.length < 3) return toast.error("Select at least 3 panel members.");
-                  toast.success(`Panel assigned for ${caseId}`);
+                  if (selected.length !== 5) return toast.error("Panel must have exactly 5 members.");
+                  toast.success(`5-member panel assigned for ${caseId}`);
                   setSelected([]);
                   setCaseId("");
                 }}
-              >Assign panel</Button>
+              >Confirm 5-member panel</Button>
+
             </div>
           </SheetContent>
         </Sheet>
