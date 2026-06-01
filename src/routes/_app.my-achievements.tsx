@@ -79,7 +79,7 @@ function MyAchievementsPage() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <Card className="p-5"><div className="caption-strong text-muted-cb">Total logged</div><div className="display-sm tabular mt-2">{stats.total}</div></Card>
-        <Card className="p-5"><div className="caption-strong text-muted-cb">Approved</div><div className="display-sm tabular mt-2 text-success">{stats.approved}</div></Card>
+        <Card className="p-5"><div className="caption-strong text-muted-cb">Validated</div><div className="display-sm tabular mt-2 text-success">{stats.validated}</div></Card>
         <Card className="p-5"><div className="caption-strong text-muted-cb">Avg AI score</div><div className="display-sm tabular mt-2 text-primary">{stats.avgScore}</div></Card>
         <Card className="p-5"><div className="caption-strong text-muted-cb">Categories covered</div><div className="display-sm tabular mt-2">{stats.categories} / {ACHIEVEMENT_CATEGORIES.length}</div></Card>
       </div>
