@@ -21,10 +21,19 @@ const RANKS = Array.from({ length: 12 }).map((_, i) => ({
 }));
 
 const DEPTS = [
-  { id: "FE", name: "Front-End Dev", hod: "Sana Malik", strength: 64 },
-  { id: "BE", name: "Back-End Dev", hod: "Nadia Qureshi", strength: 78 },
-  { id: "SQA", name: "SQA", hod: "Aisha Khan", strength: 41 },
-  { id: "DO", name: "DevOps", hod: "Hassan Rauf", strength: 22 },
+  { id: "FE", name: "Front-End Dev", hod: "Sana Malik", strength: 64, roleUpdated: true, rankUpdated: true },
+  { id: "BE", name: "Back-End Dev", hod: "Nadia Qureshi", strength: 78, roleUpdated: true, rankUpdated: false },
+  { id: "SQA", name: "SQA", hod: "Aisha Khan", strength: 41, roleUpdated: true, rankUpdated: true },
+  { id: "DO", name: "DevOps", hod: "Hassan Rauf", strength: 22, roleUpdated: true, rankUpdated: false },
+  { id: "DS", name: "Data Science", hod: "Asma Pervez", strength: 18, roleUpdated: true, rankUpdated: false },
+  { id: "PM", name: "Product Mgmt", hod: "Rizwan Ali", strength: 14, roleUpdated: true, rankUpdated: true },
+];
+
+const DECLARED_RULES = [
+  { id: "R-01", name: "Rank 16+ mandatory 5-member panel", scope: "Cycle-wide", status: "Active", updated: "2026-01-12" },
+  { id: "R-02", name: "Minimum 18 months since last promotion", scope: "All departments", status: "Active", updated: "2025-12-04" },
+  { id: "R-03", name: "Front-End: WCAG AA mandatory for Rank 14+", scope: "Front-End Dev", status: "Active", updated: "2026-01-08" },
+  { id: "R-04", name: "SQA: Test automation coverage ≥70% for Rank 15+", scope: "SQA", status: "Draft", updated: "2026-01-20" },
 ];
 
 const TEMPLATES = [
@@ -37,14 +46,14 @@ function ConfigPage() {
   return (
     <div className="p-6 lg:p-10 max-w-[1400px] mx-auto">
       <div className="mb-8">
-        <p className="caption-strong text-muted-cb">HR Admin · Configuration</p>
+        <p className="caption-strong text-muted-cb">HRBP · Configuration</p>
         <h1 className="display-md mt-2">Master data & policy</h1>
-        <p className="text-body mt-2">Ranks, departments, skills, eligibility rules, and letter templates.</p>
+        <p className="text-body mt-2">Ranks, departments, declared rules, skills, eligibility policy, and letter templates.</p>
       </div>
 
       <Tabs defaultValue="ranks">
-        <TabsList className="bg-surface-soft p-1 rounded-full">
-          {[["ranks", "Ranks"], ["departments", "Departments"], ["skills", "Skills"], ["categories", "Achievement categories"], ["policy", "Eligibility policy"], ["templates", "Letter templates"]].map(([v, l]) => (
+        <TabsList className="bg-surface-soft p-1 rounded-full flex flex-wrap h-auto">
+          {[["ranks", "Ranks"], ["departments", "Departments"], ["rules", "Rule Declaration"], ["skills", "Skills"], ["categories", "Achievement categories"], ["policy", "Eligibility policy"], ["templates", "Letter templates"]].map(([v, l]) => (
             <TabsTrigger key={v} value={v} className="rounded-full data-[state=active]:bg-ink data-[state=active]:text-white px-4 h-9">{l}</TabsTrigger>
           ))}
         </TabsList>
