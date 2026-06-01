@@ -20,19 +20,20 @@ const schema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
   role: z.enum([
     "hr_admin", "employee", "delivery_lead", "line_manager", "hod",
-    "panel_member", "final_authority", "system_admin", "auditor",
+    "panel_member", "final_authority", "c_level", "system_admin", "auditor",
   ]),
   remember: z.boolean().optional(),
 });
 type FormValues = z.infer<typeof schema>;
 
 const QUICK_ROLES: { role: Role; tag: string }[] = [
-  { role: "hr_admin", tag: "HR" },
+  { role: "hr_admin", tag: "HRBP" },
   { role: "employee", tag: "Staff" },
   { role: "delivery_lead", tag: "DL" },
   { role: "line_manager", tag: "LM" },
   { role: "hod", tag: "HOD" },
   { role: "final_authority", tag: "Final" },
+  { role: "c_level", tag: "C-Level" },
 ];
 
 function Login() {
