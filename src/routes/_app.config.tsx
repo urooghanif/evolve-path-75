@@ -42,6 +42,38 @@ const TEMPLATES = [
   { id: "T3", name: "Interview invite", lang: "EN", updated: "2025-11-30" },
 ];
 
+// UC-014 — Job role / experience / rank mapping per career track
+const CAREER_TRACKS = [
+  {
+    track: "SQA",
+    rows: [
+      { milestone: "3 years", designation: "Senior QA Engineer", rank: 14, interview: false },
+      { milestone: "5 years", designation: "Lead QA Engineer", rank: 15, interview: false },
+      { milestone: "7 years", designation: "QA Architect", rank: 16, interview: true },
+      { milestone: "9 years", designation: "QA Manager", rank: 17, interview: true },
+    ],
+  },
+  {
+    track: "Front-End",
+    rows: [
+      { milestone: "3 years", designation: "Senior Software Engineer", rank: 14, interview: false },
+      { milestone: "5 years", designation: "Lead Engineer", rank: 15, interview: false },
+      { milestone: "7 years", designation: "Engineering Manager", rank: 16, interview: true },
+      { milestone: "9 years", designation: "Principal Engineer (pending HR confirmation)", rank: 17, interview: true },
+    ],
+  },
+  {
+    track: "Back-End",
+    rows: [
+      { milestone: "3 years", designation: "Senior Software Engineer", rank: 14, interview: false },
+      { milestone: "5 years", designation: "Lead Engineer", rank: 15, interview: false },
+      { milestone: "7 years", designation: "Staff Engineer", rank: 16, interview: true },
+      { milestone: "9 years", designation: "Principal Engineer (pending HR confirmation)", rank: 17, interview: true },
+    ],
+  },
+];
+
+
 function ConfigPage() {
   return (
     <div className="p-6 lg:p-10 max-w-[1400px] mx-auto">
