@@ -27,8 +27,8 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 const QUICK_ROLES: { role: Role; tag: string }[] = [
-  { role: "hr_admin", tag: "HRBP" },
-  { role: "employee", tag: "Staff" },
+  { role: "hr_admin", tag: "HR Admin" },
+  { role: "employee", tag: "Employee" },
   { role: "delivery_lead", tag: "DL" },
   { role: "line_manager", tag: "LM" },
   { role: "hod", tag: "HOD" },
