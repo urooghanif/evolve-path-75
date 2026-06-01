@@ -17,7 +17,7 @@ import { useAuth } from "@/lib/auth";
 import { toast } from "sonner";
 import {
   ArrowLeft, FileText, Paperclip, CheckCircle2, XCircle, Clock, AlertTriangle,
-  TrendingUp, Star, Calendar, Briefcase, Sparkles, Download, MessageSquare,
+  TrendingUp, Star, Calendar, Briefcase, Sparkles, Download, MessageSquare, ShieldAlert,
 } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend } from "recharts";
 
