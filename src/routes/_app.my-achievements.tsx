@@ -60,10 +60,11 @@ function MyAchievementsPage() {
 
   const stats = {
     total: ITEMS.length,
-    approved: ITEMS.filter((i) => i.status === "approved").length,
+    validated: ITEMS.filter((i) => i.status === "validated").length,
     avgScore: Math.round(ITEMS.filter((i) => i.aiScore > 0).reduce((a, b) => a + b.aiScore, 0) / ITEMS.filter((i) => i.aiScore > 0).length),
     categories: new Set(ITEMS.map((i) => i.category)).size,
   };
+
 
   return (
     <div className="p-6 lg:p-10 max-w-[1400px] mx-auto">
