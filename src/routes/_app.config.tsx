@@ -78,17 +78,61 @@ function ConfigPage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="departments" className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {DEPTS.map((d) => (
-            <Card key={d.id} className="p-6">
-              <div className="flex justify-between"><div><Badge variant="muted" className="font-mono normal-case">{d.id}</Badge><h3 className="title-md mt-2">{d.name}</h3></div><Button variant="ghost" size="sm"><Pencil className="h-4 w-4" /></Button></div>
-              <Separator className="my-4" />
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div><div className="text-xs text-muted-cb">Head of dept</div><div className="font-semibold mt-1">{d.hod}</div></div>
-                <div><div className="text-xs text-muted-cb">Strength</div><div className="tabular text-lg mt-1">{d.strength}</div></div>
+        <TabsContent value="departments" className="mt-6 space-y-6">
+          <Card className="p-5 border-warning/40 bg-warning/5">
+            <h3 className="title-md flex items-center gap-2">⚠️ Departments — role updated, rank pending</h3>
+            <p className="text-sm text-body mt-1">These departments have updated role definitions but the rank ladder hasn't been refreshed. Promotion eligibility may be inaccurate until ranks are reconciled.</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {DEPTS.filter((d) => d.roleUpdated && !d.rankUpdated).map((d) => (
+                <div key={d.id} className="px-3 py-2 rounded-full bg-canvas border border-warning/40 text-sm flex items-center gap-2">
+                  <Badge variant="warning">Rank pending</Badge>
+                  <span className="font-semibold">{d.name}</span>
+                  <Button size="sm" variant="ghost" onClick={() => toast.success(`${d.name}: rank reconciliation queued`)}>Reconcile</Button>
+                </div>
+              ))}
+            </div>
+          </Card>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {DEPTS.map((d) => (
+              <Card key={d.id} className="p-6">
+                <div className="flex justify-between"><div><Badge variant="muted" className="font-mono normal-case">{d.id}</Badge><h3 className="title-md mt-2">{d.name}</h3></div><Button variant="ghost" size="sm"><Pencil className="h-4 w-4" /></Button></div>
+                <Separator className="my-4" />
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div><div className="text-xs text-muted-cb">Head of dept</div><div className="font-semibold mt-1">{d.hod}</div></div>
+                  <div><div className="text-xs text-muted-cb">Strength</div><div className="tabular text-lg mt-1">{d.strength}</div></div>
+                  <div><div className="text-xs text-muted-cb">Role definitions</div><div className="mt-1">{d.roleUpdated ? <Badge variant="success">Up to date</Badge> : <Badge variant="muted">Outdated</Badge>}</div></div>
+                  <div><div className="text-xs text-muted-cb">Rank ladder</div><div className="mt-1">{d.rankUpdated ? <Badge variant="success">Up to date</Badge> : <Badge variant="warning">Pending</Badge>}</div></div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="rules" className="mt-6">
+          <Card className="overflow-hidden">
+            <div className="p-6 border-b border-hairline flex justify-between items-center">
+              <div>
+                <h3 className="title-md">Declared promotion rules</h3>
+                <p className="text-sm text-body mt-1">HRBP-declared rules applied across cycles. Each rule is versioned and audit-logged.</p>
               </div>
-            </Card>
-          ))}
+              <Button onClick={() => toast.success("New rule draft created")}><Plus className="h-4 w-4" /> Declare new rule</Button>
+            </div>
+            <table className="w-full text-sm">
+              <thead className="bg-surface-soft"><tr className="text-left text-[11px] uppercase tracking-wide text-muted-cb"><th className="px-6 py-3">ID</th><th className="px-6 py-3">Rule</th><th className="px-6 py-3">Scope</th><th className="px-6 py-3">Status</th><th className="px-6 py-3">Updated</th><th className="px-6 py-3"></th></tr></thead>
+              <tbody>
+                {DECLARED_RULES.map((r) => (
+                  <tr key={r.id} className="border-t border-hairline-soft">
+                    <td className="px-6 py-4 font-mono">{r.id}</td>
+                    <td className="px-6 py-4 font-medium">{r.name}</td>
+                    <td className="px-6 py-4"><Badge variant="muted">{r.scope}</Badge></td>
+                    <td className="px-6 py-4">{r.status === "Active" ? <Badge variant="success">Active</Badge> : <Badge variant="warning">Draft</Badge>}</td>
+                    <td className="px-6 py-4 text-muted-cb">{r.updated}</td>
+                    <td className="px-6 py-4 text-right"><Button variant="ghost" size="sm"><Pencil className="h-4 w-4" /></Button></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Card>
         </TabsContent>
 
         <TabsContent value="skills" className="mt-6">
