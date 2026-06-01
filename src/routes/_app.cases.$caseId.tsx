@@ -311,7 +311,7 @@ function CaseDetailPage() {
           ) : user.role === "hr_admin" ? (
             <Card className="p-6 border-warning/40 ring-1 ring-warning/20">
               <div className="flex items-center gap-2 mb-1">
-                <ShieldOverrideIcon /> <span className="caption-strong text-warning">HRBP override authority</span>
+                <ShieldAlert className="h-4 w-4 text-warning" /> <span className="caption-strong text-warning">HRBP override authority</span>
               </div>
               <h3 className="title-md mb-2">Override or reassign</h3>
               <p className="text-sm text-body mb-4">As HRBP you may override a stuck stage, reassign the reviewer, or fast-track this case. All overrides are written to the audit trail.</p>
