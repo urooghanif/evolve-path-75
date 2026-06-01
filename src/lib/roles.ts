@@ -32,7 +32,7 @@ export type Role =
   | "auditor";
 
 export const ROLE_LABELS: Record<Role, string> = {
-  hr_admin: "HRBP (HR Business Partner)",
+  hr_admin: "HR Admin",
   employee: "Employee",
   delivery_lead: "Delivery Lead",
   line_manager: "Line Manager",

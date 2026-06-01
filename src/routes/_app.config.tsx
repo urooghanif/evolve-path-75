@@ -46,7 +46,7 @@ function ConfigPage() {
   return (
     <div className="p-6 lg:p-10 max-w-[1400px] mx-auto">
       <div className="mb-8">
-        <p className="caption-strong text-muted-cb">HRBP · Configuration</p>
+        <p className="caption-strong text-muted-cb">HR Admin · Configuration</p>
         <h1 className="display-md mt-2">Master data & policy</h1>
         <p className="text-body mt-2">Ranks, departments, declared rules, skills, eligibility policy, and letter templates.</p>
       </div>
@@ -113,7 +113,7 @@ function ConfigPage() {
             <div className="p-6 border-b border-hairline flex justify-between items-center">
               <div>
                 <h3 className="title-md">Declared promotion rules</h3>
-                <p className="text-sm text-body mt-1">HRBP-declared rules applied across cycles. Each rule is versioned and audit-logged.</p>
+                <p className="text-sm text-body mt-1">HR Admin-declared rules applied across cycles. Each rule is versioned and audit-logged.</p>
               </div>
               <Button onClick={() => toast.success("New rule draft created")}><Plus className="h-4 w-4" /> Declare new rule</Button>
             </div>
