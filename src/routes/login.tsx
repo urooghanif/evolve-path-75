@@ -75,25 +75,8 @@ function Login() {
             <h1 className="display-lg">Sign in</h1>
             <p className="text-body text-sm mt-2">Welcome back — choose your role to enter the portal.</p>
 
-            {/* Quick role chips */}
-            <div className="mt-6 flex flex-wrap gap-2">
-              {QUICK_ROLES.map((r) => (
-                <button
-                  key={r.role}
-                  type="button"
-                  onClick={() => setValue("role", r.role)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-colors border ${
-                    activeRole === r.role
-                      ? "bg-primary text-white border-primary"
-                      : "bg-surface-soft text-body border-hairline hover:border-primary/40"
-                  }`}
-                >
-                  {r.tag}
-                </button>
-              ))}
-            </div>
-
             <form onSubmit={handleSubmit(onSubmit)} className="mt-7 space-y-4">
+
               <Field label="Email" error={errors.email?.message}>
                 <Input type="email" className="h-12 rounded-xl border-hairline" placeholder="you@company.com.pk" {...register("email")} />
               </Field>
@@ -123,9 +106,10 @@ function Login() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {(Object.keys(ROLE_LABELS) as Role[]).map((r) => (
+                    {(Object.keys(ROLE_LABELS) as Role[]).filter((r) => r !== "c_level").map((r) => (
                       <SelectItem key={r} value={r}>{ROLE_LABELS[r]}</SelectItem>
                     ))}
+
                   </SelectContent>
                 </Select>
               </Field>
