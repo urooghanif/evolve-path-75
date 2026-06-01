@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,9 +9,11 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { Checkbox } from "@/components/ui/checkbox";
 import { CASES } from "@/lib/mock-data";
-import { Download, Send, FileText, CheckCircle2, Sparkles, Printer } from "lucide-react";
+import { Download, Send, CheckCircle2, Sparkles, Printer, ShieldCheck, Lock } from "lucide-react";
 import { toast } from "sonner";
+
 
 export const Route = createFileRoute("/_app/letters")({ component: LettersPage });
 
