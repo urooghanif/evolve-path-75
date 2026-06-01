@@ -29,10 +29,28 @@ const ISSUED = [
   { id: "LTR-2026-0116", case: "PC-1009", employee: "Yuki Tanaka", template: "Deferral notification", issued: "2026-01-12", channel: "Email", status: "sent" },
 ];
 
+const HRBP_CHECKLIST = [
+  { id: "active", label: "Active employee status verified" },
+  { id: "rank", label: "Proposed rank matches approved decision" },
+  { id: "desig", label: "Designation matches career-track mapping (UC-014)" },
+  { id: "effective", label: "Effective date confirmed" },
+  { id: "approvals", label: "All upstream approvals complete (DL, LM, HOD, Final)" },
+  { id: "interview", label: "Interview panel (5 members) complete — if Rank 16+" },
+  { id: "disciplinary", label: "No open disciplinary or HR holds" },
+  { id: "comp", label: "Compensation impact reviewed (restricted role)" },
+];
+
 function LettersPage() {
   const [caseId, setCaseId] = useState<string>(CASES.find((c) => c.stage === "completed")?.id || CASES[0].id);
   const [template, setTemplate] = useState<string>("T1");
+  const [checked, setChecked] = useState<Record<string, boolean>>({});
+  const [validated, setValidated] = useState(false);
   const selected = CASES.find((c) => c.id === caseId)!;
+
+  const allChecked = useMemo(() => HRBP_CHECKLIST.every((i) => checked[i.id]), [checked]);
+  const toggle = (id: string) => setChecked((c) => ({ ...c, [id]: !c[id] }));
+  const onCaseChange = (id: string) => { setCaseId(id); setChecked({}); setValidated(false); };
+
 
   return (
     <div className="p-6 lg:p-10 max-w-[1400px] mx-auto">
