@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,9 +9,11 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { Checkbox } from "@/components/ui/checkbox";
 import { CASES } from "@/lib/mock-data";
-import { Download, Send, FileText, CheckCircle2, Sparkles, Printer } from "lucide-react";
+import { Download, Send, CheckCircle2, Sparkles, Printer, ShieldCheck, Lock } from "lucide-react";
 import { toast } from "sonner";
+
 
 export const Route = createFileRoute("/_app/letters")({ component: LettersPage });
 
@@ -27,10 +29,28 @@ const ISSUED = [
   { id: "LTR-2026-0116", case: "PC-1009", employee: "Yuki Tanaka", template: "Deferral notification", issued: "2026-01-12", channel: "Email", status: "sent" },
 ];
 
+const HRBP_CHECKLIST = [
+  { id: "active", label: "Active employee status verified" },
+  { id: "rank", label: "Proposed rank matches approved decision" },
+  { id: "desig", label: "Designation matches career-track mapping (UC-014)" },
+  { id: "effective", label: "Effective date confirmed" },
+  { id: "approvals", label: "All upstream approvals complete (DL, LM, HOD, Final)" },
+  { id: "interview", label: "Interview panel (5 members) complete — if Rank 16+" },
+  { id: "disciplinary", label: "No open disciplinary or HR holds" },
+  { id: "comp", label: "Compensation impact reviewed (restricted role)" },
+];
+
 function LettersPage() {
   const [caseId, setCaseId] = useState<string>(CASES.find((c) => c.stage === "completed")?.id || CASES[0].id);
   const [template, setTemplate] = useState<string>("T1");
+  const [checked, setChecked] = useState<Record<string, boolean>>({});
+  const [validated, setValidated] = useState(false);
   const selected = CASES.find((c) => c.id === caseId)!;
+
+  const allChecked = useMemo(() => HRBP_CHECKLIST.every((i) => checked[i.id]), [checked]);
+  const toggle = (id: string) => setChecked((c) => ({ ...c, [id]: !c[id] }));
+  const onCaseChange = (id: string) => { setCaseId(id); setChecked({}); setValidated(false); };
+
 
   return (
     <div className="p-6 lg:p-10 max-w-[1400px] mx-auto">
@@ -55,7 +75,7 @@ function LettersPage() {
               <div className="mt-4 space-y-4">
                 <div>
                   <Label>Case</Label>
-                  <Select value={caseId} onValueChange={setCaseId}>
+                  <Select value={caseId} onValueChange={onCaseChange}>
                     <SelectTrigger className="mt-2"><SelectValue /></SelectTrigger>
                     <SelectContent>
                       {CASES.map((c) => <SelectItem key={c.id} value={c.id}>{c.id} · {c.employeeName}</SelectItem>)}
@@ -75,7 +95,7 @@ function LettersPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div><Label>New designation</Label><Input defaultValue={selected.proposedDesignation} className="mt-2" /></div>
-                  <div><Label>New CTC</Label><Input defaultValue="₹42,00,000" className="mt-2" /></div>
+                  <div><Label>New CTC (PKR)</Label><Input defaultValue="PKR 4,200,000" className="mt-2" /></div>
                 </div>
                 <div>
                   <Label>Delivery</Label>
@@ -90,16 +110,52 @@ function LettersPage() {
                 </div>
               </div>
             </Card>
+
+            {/* HRBP Validation Checklist — UC-009 */}
+            <Card className={`p-6 border-2 ${validated ? "border-success/50 bg-success/5" : "border-warning/40 bg-warning/5"}`}>
+              <h3 className="title-md flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-primary" /> HR Admin validation checklist
+              </h3>
+              <p className="text-sm text-body mt-1">UC-009 — letter generation is blocked until every item is verified.</p>
+              <div className="mt-4 space-y-2.5">
+                {HRBP_CHECKLIST.map((item) => (
+                  <label key={item.id} className="flex items-start gap-3 p-2.5 rounded-md hover:bg-canvas cursor-pointer">
+                    <Checkbox checked={!!checked[item.id]} onCheckedChange={() => toggle(item.id)} disabled={validated} className="mt-0.5" />
+                    <span className={`text-sm ${checked[item.id] ? "text-ink line-through decoration-muted-cb/40" : "text-body"}`}>{item.label}</span>
+                  </label>
+                ))}
+              </div>
+              <Button
+                size="sm"
+                variant={validated ? "outline" : "default"}
+                disabled={!allChecked && !validated}
+                className="mt-4 w-full"
+                onClick={() => {
+                  if (validated) { setValidated(false); return; }
+                  setValidated(true);
+                  toast.success("Case HR-validated — letter generation unlocked");
+                }}
+              >
+                {validated ? <><CheckCircle2 className="h-4 w-4" /> HR Validated — undo</> : "Mark case HR-validated"}
+              </Button>
+            </Card>
+
             <Card className="p-6">
               <h3 className="title-md flex items-center gap-2"><Sparkles className="h-4 w-4 text-primary" /> AI assistant</h3>
               <p className="text-sm text-body mt-2">Detected tone: <Badge variant="muted">Formal · warm</Badge>. Length looks appropriate.</p>
               <Button variant="outline" size="sm" className="mt-3 w-full">Rewrite paragraph</Button>
             </Card>
             <div className="grid grid-cols-2 gap-3">
-              <Button variant="outline"><Printer className="h-4 w-4" /> Preview PDF</Button>
-              <Button onClick={() => toast.success("Letter dispatched")}><Send className="h-4 w-4" /> Generate & send</Button>
+              <Button variant="outline" disabled={!validated}><Printer className="h-4 w-4" /> Preview PDF</Button>
+              <Button
+                disabled={!validated}
+                onClick={() => toast.success("Letter generated, locked, and dispatched")}
+              >
+                {validated ? <><Send className="h-4 w-4" /> Generate & send</> : <><Lock className="h-4 w-4" /> Locked — validate first</>}
+              </Button>
             </div>
           </div>
+
 
           {/* Preview */}
           <Card className="lg:col-span-3 p-10 bg-white border-hairline">

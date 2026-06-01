@@ -10,7 +10,7 @@ import { Search, Paperclip, Plus, Sparkles, TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/_app/my-achievements")({ component: MyAchievementsPage });
 
-type Status = "draft" | "submitted" | "reviewed" | "approved";
+type Status = "draft" | "submitted" | "dl_review" | "lm_review" | "returned" | "validated" | "rejected" | "archived";
 
 type Item = {
   id: string;
@@ -26,20 +26,27 @@ type Item = {
 };
 
 const ITEMS: Item[] = [
-  { id: "A-2024", title: "Re-architected design-system component library", category: "Technical Excellence", date: "2025-11-14", impact: "Reduced UI defect rate by 38% across 6 squads.", metrics: "84 components · 38% defects ↓", status: "approved", aiScore: 92, evidence: 2, cycle: "March 2026" },
-  { id: "A-2023", title: "Front-end guild lead — 12-week React curriculum", category: "Mentoring & Leadership", date: "2025-09-02", impact: "9 mentees promoted; engineering NPS +31 pts.", metrics: "18 mentees · 24 RFCs · 9 promotions", status: "reviewed", aiScore: 88, evidence: 1, cycle: "March 2026" },
-  { id: "A-2022", title: "Checkout funnel performance overhaul", category: "Project Delivery", date: "2025-07-21", impact: "Conversion +4.6%, +PKR 870M annualised revenue.", metrics: "LCP 3.4s → 1.6s · +4.6% conv", status: "approved", aiScore: 95, evidence: 3, cycle: "October 2025" },
-  { id: "A-2021", title: "Accessibility audit & WCAG remediation", category: "Process Improvement", date: "2025-05-03", impact: "Closed 142 a11y issues across 8 surfaces.", metrics: "142 issues · WCAG 2.2 AA", status: "submitted", aiScore: 79, evidence: 2, cycle: "March 2026" },
-  { id: "A-2020", title: "Build pipeline migration to Turbo", category: "Innovation", date: "2025-03-19", impact: "CI time cut from 14m to 4m.", metrics: "14m → 4m · −71%", status: "approved", aiScore: 84, evidence: 1, cycle: "October 2025" },
+  { id: "A-2024", title: "Re-architected design-system component library", category: "Technical Excellence", date: "2025-11-14", impact: "Reduced UI defect rate by 38% across 6 squads.", metrics: "84 components · 38% defects ↓", status: "validated", aiScore: 92, evidence: 2, cycle: "March 2026" },
+  { id: "A-2023", title: "Front-end guild lead — 12-week React curriculum", category: "Mentoring & Leadership", date: "2025-09-02", impact: "9 mentees promoted; engineering NPS +31 pts.", metrics: "18 mentees · 24 RFCs · 9 promotions", status: "lm_review", aiScore: 88, evidence: 1, cycle: "March 2026" },
+  { id: "A-2022", title: "Checkout funnel performance overhaul", category: "Project Delivery", date: "2025-07-21", impact: "Conversion +4.6%, +PKR 870M annualised revenue.", metrics: "LCP 3.4s → 1.6s · +4.6% conv", status: "validated", aiScore: 95, evidence: 3, cycle: "October 2025" },
+  { id: "A-2021", title: "Accessibility audit & WCAG remediation", category: "Process Improvement", date: "2025-05-03", impact: "Closed 142 a11y issues across 8 surfaces.", metrics: "142 issues · WCAG 2.2 AA", status: "dl_review", aiScore: 79, evidence: 2, cycle: "March 2026" },
+  { id: "A-2020", title: "Build pipeline migration to Turbo", category: "Innovation", date: "2025-03-19", impact: "CI time cut from 14m to 4m.", metrics: "14m → 4m · −71%", status: "archived", aiScore: 84, evidence: 1, cycle: "October 2025" },
   { id: "A-2019", title: "On-call runbook overhaul", category: "Customer Impact", date: "2025-02-11", impact: "MTTR down 46% over the quarter.", metrics: "MTTR −46% · P1s −3", status: "draft", aiScore: 0, evidence: 0, cycle: "March 2026" },
+  { id: "A-2018", title: "Cross-team observability standards RFC", category: "Process Improvement", date: "2025-01-08", impact: "Adopted by 4 squads; SLO breaches −22%.", metrics: "RFC #117 · 4 squads", status: "returned", aiScore: 71, evidence: 0, cycle: "October 2025" },
+  { id: "A-2017", title: "Speculative front-end framework spike", category: "Innovation", date: "2024-11-02", impact: "Spike abandoned after architecture review.", metrics: "—", status: "rejected", aiScore: 42, evidence: 0, cycle: "October 2024" },
 ];
 
-const STATUS_META: Record<Status, { label: string; variant: "secondary" | "default" | "outline" | "success" }> = {
+const STATUS_META: Record<Status, { label: string; variant: "secondary" | "default" | "outline" | "success" | "destructive" | "warning" | "muted" }> = {
   draft: { label: "Draft", variant: "secondary" },
   submitted: { label: "Submitted", variant: "default" },
-  reviewed: { label: "Under review", variant: "outline" },
-  approved: { label: "Approved", variant: "success" },
+  dl_review: { label: "Pending DL Review", variant: "default" },
+  lm_review: { label: "Pending LM Review", variant: "default" },
+  returned: { label: "Returned for Clarification", variant: "warning" },
+  validated: { label: "Validated", variant: "success" },
+  rejected: { label: "Rejected", variant: "destructive" },
+  archived: { label: "Archived", variant: "muted" },
 };
+
 
 function MyAchievementsPage() {
   const [q, setQ] = useState("");
@@ -53,10 +60,11 @@ function MyAchievementsPage() {
 
   const stats = {
     total: ITEMS.length,
-    approved: ITEMS.filter((i) => i.status === "approved").length,
+    validated: ITEMS.filter((i) => i.status === "validated").length,
     avgScore: Math.round(ITEMS.filter((i) => i.aiScore > 0).reduce((a, b) => a + b.aiScore, 0) / ITEMS.filter((i) => i.aiScore > 0).length),
     categories: new Set(ITEMS.map((i) => i.category)).size,
   };
+
 
   return (
     <div className="p-6 lg:p-10 max-w-[1400px] mx-auto">
@@ -71,7 +79,7 @@ function MyAchievementsPage() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <Card className="p-5"><div className="caption-strong text-muted-cb">Total logged</div><div className="display-sm tabular mt-2">{stats.total}</div></Card>
-        <Card className="p-5"><div className="caption-strong text-muted-cb">Approved</div><div className="display-sm tabular mt-2 text-success">{stats.approved}</div></Card>
+        <Card className="p-5"><div className="caption-strong text-muted-cb">Validated</div><div className="display-sm tabular mt-2 text-success">{stats.validated}</div></Card>
         <Card className="p-5"><div className="caption-strong text-muted-cb">Avg AI score</div><div className="display-sm tabular mt-2 text-primary">{stats.avgScore}</div></Card>
         <Card className="p-5"><div className="caption-strong text-muted-cb">Categories covered</div><div className="display-sm tabular mt-2">{stats.categories} / {ACHIEVEMENT_CATEGORIES.length}</div></Card>
       </div>
@@ -83,9 +91,10 @@ function MyAchievementsPage() {
         </div>
         <Tabs value={tab} onValueChange={setTab}>
           <TabsList className="bg-surface-soft rounded-full p-1">
-            {(["all","draft","submitted","reviewed","approved"] as const).map((t) => (
-              <TabsTrigger key={t} value={t} className="rounded-full px-4 h-8 data-[state=active]:bg-ink data-[state=active]:text-white capitalize">{t}</TabsTrigger>
+            {(["all","draft","dl_review","lm_review","returned","validated","rejected","archived"] as const).map((t) => (
+              <TabsTrigger key={t} value={t} className="rounded-full px-3 h-8 data-[state=active]:bg-ink data-[state=active]:text-white text-xs whitespace-nowrap">{t === "all" ? "All" : STATUS_META[t as Status].label}</TabsTrigger>
             ))}
+
           </TabsList>
         </Tabs>
       </Card>

@@ -42,6 +42,38 @@ const TEMPLATES = [
   { id: "T3", name: "Interview invite", lang: "EN", updated: "2025-11-30" },
 ];
 
+// UC-014 — Job role / experience / rank mapping per career track
+const CAREER_TRACKS = [
+  {
+    track: "SQA",
+    rows: [
+      { milestone: "3 years", designation: "Senior QA Engineer", rank: 14, interview: false },
+      { milestone: "5 years", designation: "Lead QA Engineer", rank: 15, interview: false },
+      { milestone: "7 years", designation: "QA Architect", rank: 16, interview: true },
+      { milestone: "9 years", designation: "QA Manager", rank: 17, interview: true },
+    ],
+  },
+  {
+    track: "Front-End",
+    rows: [
+      { milestone: "3 years", designation: "Senior Software Engineer", rank: 14, interview: false },
+      { milestone: "5 years", designation: "Lead Engineer", rank: 15, interview: false },
+      { milestone: "7 years", designation: "Engineering Manager", rank: 16, interview: true },
+      { milestone: "9 years", designation: "Principal Engineer (pending HR confirmation)", rank: 17, interview: true },
+    ],
+  },
+  {
+    track: "Back-End",
+    rows: [
+      { milestone: "3 years", designation: "Senior Software Engineer", rank: 14, interview: false },
+      { milestone: "5 years", designation: "Lead Engineer", rank: 15, interview: false },
+      { milestone: "7 years", designation: "Staff Engineer", rank: 16, interview: true },
+      { milestone: "9 years", designation: "Principal Engineer (pending HR confirmation)", rank: 17, interview: true },
+    ],
+  },
+];
+
+
 function ConfigPage() {
   return (
     <div className="p-6 lg:p-10 max-w-[1400px] mx-auto">
@@ -53,7 +85,7 @@ function ConfigPage() {
 
       <Tabs defaultValue="ranks">
         <TabsList className="bg-surface-soft p-1 rounded-full flex flex-wrap h-auto">
-          {[["ranks", "Ranks"], ["departments", "Departments"], ["rules", "Rule Declaration"], ["skills", "Skills"], ["categories", "Achievement categories"], ["policy", "Eligibility policy"], ["templates", "Letter templates"]].map(([v, l]) => (
+          {[["ranks", "Ranks"], ["departments", "Departments"], ["careers", "Career tracks"], ["rules", "Rule Declaration"], ["skills", "Skills"], ["categories", "Achievement categories"], ["policy", "Eligibility policy"], ["templates", "Letter templates"]].map(([v, l]) => (
             <TabsTrigger key={v} value={v} className="rounded-full data-[state=active]:bg-ink data-[state=active]:text-white px-4 h-9">{l}</TabsTrigger>
           ))}
         </TabsList>
@@ -107,6 +139,53 @@ function ConfigPage() {
             ))}
           </div>
         </TabsContent>
+
+        <TabsContent value="careers" className="mt-6 space-y-6">
+          <Card className="p-6 bg-primary/5 border-primary/20">
+            <h3 className="title-md">Career-track → role / rank mapping (UC-014)</h3>
+            <p className="text-sm text-body mt-1">
+              Derive proposed rank and designation from each career track's milestone (3 / 5 / 7 / 9 years total eligible experience).
+              Rank 16 and above auto-flags as Interview Required.
+            </p>
+          </Card>
+
+          {CAREER_TRACKS.map((t) => (
+            <Card key={t.track} className="overflow-hidden">
+              <div className="p-6 border-b border-hairline flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Badge variant="muted" className="font-mono normal-case">{t.track}</Badge>
+                  <h3 className="title-md">{t.track} career track</h3>
+                </div>
+                <Button variant="outline" size="sm"><Pencil className="h-4 w-4" /> Edit mapping</Button>
+              </div>
+              <table className="w-full text-sm">
+                <thead className="bg-surface-soft">
+                  <tr className="text-left text-[11px] uppercase tracking-wide text-muted-cb">
+                    <th className="px-6 py-3">Milestone</th>
+                    <th className="px-6 py-3">Target designation</th>
+                    <th className="px-6 py-3">Target rank</th>
+                    <th className="px-6 py-3">Interview required</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {t.rows.map((r) => (
+                    <tr key={r.milestone} className="border-t border-hairline-soft">
+                      <td className="px-6 py-4 font-semibold">{r.milestone}</td>
+                      <td className="px-6 py-4">{r.designation}</td>
+                      <td className="px-6 py-4 tabular">R{r.rank}</td>
+                      <td className="px-6 py-4">
+                        {r.interview
+                          ? <Badge variant="warning">Required (5-member panel)</Badge>
+                          : <Badge variant="muted">Not required</Badge>}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Card>
+          ))}
+        </TabsContent>
+
 
         <TabsContent value="rules" className="mt-6">
           <Card className="overflow-hidden">
