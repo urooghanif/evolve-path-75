@@ -47,7 +47,8 @@ function Login() {
     navigate({ to: "/dashboard", replace: true });
   };
 
-  const activeRole = watch("role");
+
+
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-[#eef0f4] flex items-center justify-center p-3 lg:p-6">
