@@ -49,6 +49,7 @@ function CaseDetailPage() {
     if (user.role === "hod" && c.stage === "hod_review") return "HOD";
     if (user.role === "panel_member" && (c.stage === "panel_evaluation" || c.stage === "interview_required")) return "Panel";
     if (user.role === "final_authority" && c.stage === "final_approval") return "Final Authority";
+    if (user.role === "hr_admin" && c.stage === "hr_validation") return "HR Admin";
     return null;
   }, [user.role, c.stage]);
 
@@ -367,12 +368,19 @@ function CaseDetailPage() {
 
 function ReviewActionPanel({ role, caseId }: { role: string; caseId: string }) {
   const isLM = role === "Line Manager";
+  const isHR = role === "HR Admin";
   const options = isLM
     ? [
         { v: "recommend", l: "Recommend", c: "text-success" },
         { v: "decline", l: "Decline", c: "text-destructive" },
         { v: "defer", l: "Defer", c: "text-warning" },
         { v: "info", l: "Request info", c: "text-primary" },
+      ]
+    : isHR
+    ? [
+        { v: "validate", l: "Validate & dispatch", c: "text-success" },
+        { v: "return", l: "Return for fix", c: "text-warning" },
+        { v: "reject", l: "Reject", c: "text-destructive" },
       ]
     : [
         { v: "endorse", l: "Endorse", c: "text-success" },
@@ -457,9 +465,9 @@ function ReviewActionPanel({ role, caseId }: { role: string; caseId: string }) {
 
         <div className="flex flex-col gap-2">
           <Button onClick={submit} className="w-full" disabled={!comments.trim()}>
-            {(decision === "endorse" || decision === "recommend") && <CheckCircle2 className="h-4 w-4" />}
+            {(decision === "endorse" || decision === "recommend" || decision === "validate") && <CheckCircle2 className="h-4 w-4" />}
             {(decision === "reject" || decision === "decline") && <XCircle className="h-4 w-4" />}
-            {decision === "defer" && <Clock className="h-4 w-4" />}
+            {(decision === "defer" || decision === "return") && <Clock className="h-4 w-4" />}
             {decision === "info" && <MessageSquare className="h-4 w-4" />}
             Submit {actionLabel.toLowerCase()}
           </Button>
