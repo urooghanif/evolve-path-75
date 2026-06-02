@@ -34,6 +34,7 @@ function CasesPage() {
   if (!user) return null;
   const titleByRole: Record<string, string> = {
     hr_admin: "All promotion cases",
+    employee: "My promotion case",
     delivery_lead: "Cases awaiting your delivery review",
     line_manager: "Cases awaiting your manager review",
     hod: "Department promotion cases",
