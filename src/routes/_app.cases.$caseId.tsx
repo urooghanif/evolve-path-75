@@ -49,6 +49,7 @@ function CaseDetailPage() {
     if (user.role === "hod" && c.stage === "hod_review") return "HOD";
     if (user.role === "panel_member" && (c.stage === "panel_evaluation" || c.stage === "interview_required")) return "Panel";
     if (user.role === "final_authority" && c.stage === "final_approval") return "Final Authority";
+    if (user.role === "hr_admin" && c.stage === "hr_validation") return "HR Admin";
     return null;
   }, [user.role, c.stage]);
 
