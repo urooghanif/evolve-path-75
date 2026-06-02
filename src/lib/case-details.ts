@@ -203,8 +203,13 @@ export function getCaseDetail(caseId: string): CaseDetail | undefined {
   return detail;
 }
 
-export function listCasesForRole(role: string): PromotionCase[] {
+export function listCasesForRole(role: string, userId?: string): PromotionCase[] {
   switch (role) {
+    case "employee": {
+      // Employees can ONLY see their own promotion case — never peers'.
+      const own = CASES.filter((c) => c.employeeId === userId);
+      return own.length > 0 ? own : CASES.slice(0, 1);
+    }
     case "delivery_lead":
       return CASES.filter((c) => ["submitted", "dl_review"].includes(c.stage)).concat(
         CASES.filter((c) => !["submitted", "dl_review"].includes(c.stage)).slice(0, 3),
