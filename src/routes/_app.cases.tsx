@@ -21,7 +21,7 @@ function CasesPage() {
   const [stage, setStage] = useState<string>("all");
   const [dept, setDept] = useState<string>("all");
 
-  const cases = useMemo(() => (user ? listCasesForRole(user.role) : []), [user]);
+  const cases = useMemo(() => (user ? listCasesForRole(user.role, user.id) : []), [user]);
   const departments = useMemo(() => Array.from(new Set(cases.map((c) => c.department))), [cases]);
 
   const filtered = cases.filter((c) => {
