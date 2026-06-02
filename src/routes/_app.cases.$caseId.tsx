@@ -368,12 +368,19 @@ function CaseDetailPage() {
 
 function ReviewActionPanel({ role, caseId }: { role: string; caseId: string }) {
   const isLM = role === "Line Manager";
+  const isHR = role === "HR Admin";
   const options = isLM
     ? [
         { v: "recommend", l: "Recommend", c: "text-success" },
         { v: "decline", l: "Decline", c: "text-destructive" },
         { v: "defer", l: "Defer", c: "text-warning" },
         { v: "info", l: "Request info", c: "text-primary" },
+      ]
+    : isHR
+    ? [
+        { v: "validate", l: "Validate & dispatch", c: "text-success" },
+        { v: "return", l: "Return for fix", c: "text-warning" },
+        { v: "reject", l: "Reject", c: "text-destructive" },
       ]
     : [
         { v: "endorse", l: "Endorse", c: "text-success" },
