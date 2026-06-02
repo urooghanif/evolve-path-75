@@ -366,18 +366,37 @@ function CaseDetailPage() {
 }
 
 function ReviewActionPanel({ role, caseId }: { role: string; caseId: string }) {
-  const [decision, setDecision] = useState<string>("endorse");
+  const isLM = role === "Line Manager";
+  const options = isLM
+    ? [
+        { v: "recommend", l: "Recommend", c: "text-success" },
+        { v: "decline", l: "Decline", c: "text-destructive" },
+        { v: "defer", l: "Defer", c: "text-warning" },
+        { v: "info", l: "Request info", c: "text-primary" },
+      ]
+    : [
+        { v: "endorse", l: "Endorse", c: "text-success" },
+        { v: "defer", l: "Defer", c: "text-warning" },
+        { v: "reject", l: "Reject", c: "text-destructive" },
+      ];
+  const [decision, setDecision] = useState<string>(options[0].v);
   const [rating, setRating] = useState(4);
-  const [strengths, setStrengths] = useState("");
+  const [comments, setComments] = useState("");
   const [gaps, setGaps] = useState("");
 
   const submit = () => {
-    if (!strengths.trim()) {
-      toast.error("Please document strengths before submitting.");
+    if (!comments.trim()) {
+      toast.error("Comments are mandatory before submitting your decision.");
       return;
     }
-    toast.success(`${role} review submitted for ${caseId}`);
+    if (comments.trim().length < 15) {
+      toast.error("Please provide a more substantive comment (min. 15 characters).");
+      return;
+    }
+    toast.success(`${role} decision "${decision}" submitted for ${caseId}`);
   };
+
+  const actionLabel = options.find((o) => o.v === decision)?.l ?? decision;
 
   return (
     <Card className="p-6 border-primary/40 ring-1 ring-primary/20">
@@ -390,12 +409,8 @@ function ReviewActionPanel({ role, caseId }: { role: string; caseId: string }) {
       <div className="space-y-4">
         <div>
           <Label className="text-xs uppercase tracking-wide text-muted-cb mb-2 block">Decision</Label>
-          <RadioGroup value={decision} onValueChange={setDecision} className="grid grid-cols-3 gap-2">
-            {[
-              { v: "endorse", l: "Endorse", c: "text-success" },
-              { v: "defer", l: "Defer", c: "text-warning" },
-              { v: "reject", l: "Reject", c: "text-destructive" },
-            ].map((o) => (
+          <RadioGroup value={decision} onValueChange={setDecision} className={`grid gap-2 ${isLM ? "grid-cols-2" : "grid-cols-3"}`}>
+            {options.map((o) => (
               <label key={o.v} className={`flex items-center gap-2 px-3 py-2.5 rounded-md border cursor-pointer text-sm font-medium transition ${decision === o.v ? "border-primary bg-primary/5" : "border-hairline hover:bg-surface-soft"}`}>
                 <RadioGroupItem value={o.v} className="sr-only" />
                 <span className={o.c}>{o.l}</span>
@@ -416,8 +431,21 @@ function ReviewActionPanel({ role, caseId }: { role: string; caseId: string }) {
         </div>
 
         <div>
-          <Label className="text-xs uppercase tracking-wide text-muted-cb mb-2 block">Strengths *</Label>
-          <Textarea value={strengths} onChange={(e) => setStrengths(e.target.value)} rows={3} placeholder="What stood out about this candidate?" />
+          <Label className="text-xs uppercase tracking-wide text-muted-cb mb-2 block">
+            Comments <span className="text-destructive">*</span> <span className="normal-case text-muted-cb">(mandatory)</span>
+          </Label>
+          <Textarea
+            value={comments}
+            onChange={(e) => setComments(e.target.value)}
+            rows={4}
+            placeholder={
+              decision === "decline" ? "Document the reasons for declining this promotion case…"
+              : decision === "defer" ? "Explain what should change before reconsidering…"
+              : decision === "info" ? "List the specific information you need from the candidate or DL…"
+              : "Document the strengths and rationale supporting your decision…"
+            }
+          />
+          <p className="text-xs text-muted-cb mt-1">Recorded against the case audit trail. Cannot be edited after submission.</p>
         </div>
 
         <div>
@@ -428,11 +456,12 @@ function ReviewActionPanel({ role, caseId }: { role: string; caseId: string }) {
         <Separator />
 
         <div className="flex flex-col gap-2">
-          <Button onClick={submit} className="w-full">
-            {decision === "endorse" && <CheckCircle2 className="h-4 w-4" />}
-            {decision === "reject" && <XCircle className="h-4 w-4" />}
+          <Button onClick={submit} className="w-full" disabled={!comments.trim()}>
+            {(decision === "endorse" || decision === "recommend") && <CheckCircle2 className="h-4 w-4" />}
+            {(decision === "reject" || decision === "decline") && <XCircle className="h-4 w-4" />}
             {decision === "defer" && <Clock className="h-4 w-4" />}
-            Submit {decision}
+            {decision === "info" && <MessageSquare className="h-4 w-4" />}
+            Submit {actionLabel.toLowerCase()}
           </Button>
           <Button variant="ghost" size="sm" onClick={() => toast("Saved as draft")}>Save draft</Button>
         </div>

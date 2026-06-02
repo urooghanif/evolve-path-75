@@ -21,7 +21,7 @@ function CasesPage() {
   const [stage, setStage] = useState<string>("all");
   const [dept, setDept] = useState<string>("all");
 
-  const cases = useMemo(() => (user ? listCasesForRole(user.role) : []), [user]);
+  const cases = useMemo(() => (user ? listCasesForRole(user.role, user.id) : []), [user]);
   const departments = useMemo(() => Array.from(new Set(cases.map((c) => c.department))), [cases]);
 
   const filtered = cases.filter((c) => {
@@ -34,6 +34,7 @@ function CasesPage() {
   if (!user) return null;
   const titleByRole: Record<string, string> = {
     hr_admin: "All promotion cases",
+    employee: "My promotion case",
     delivery_lead: "Cases awaiting your delivery review",
     line_manager: "Cases awaiting your manager review",
     hod: "Department promotion cases",
