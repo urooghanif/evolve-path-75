@@ -465,9 +465,9 @@ function ReviewActionPanel({ role, caseId }: { role: string; caseId: string }) {
 
         <div className="flex flex-col gap-2">
           <Button onClick={submit} className="w-full" disabled={!comments.trim()}>
-            {(decision === "endorse" || decision === "recommend") && <CheckCircle2 className="h-4 w-4" />}
+            {(decision === "endorse" || decision === "recommend" || decision === "validate") && <CheckCircle2 className="h-4 w-4" />}
             {(decision === "reject" || decision === "decline") && <XCircle className="h-4 w-4" />}
-            {decision === "defer" && <Clock className="h-4 w-4" />}
+            {(decision === "defer" || decision === "return") && <Clock className="h-4 w-4" />}
             {decision === "info" && <MessageSquare className="h-4 w-4" />}
             Submit {actionLabel.toLowerCase()}
           </Button>
